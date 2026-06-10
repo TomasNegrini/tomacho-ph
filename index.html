@@ -322,6 +322,28 @@
     }
     .grid-row .photo-item { height: 280px; }
 
+    /* ── REELS ── */
+    .reels-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 900px;
+    }
+    .reel-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .reel-wrap iframe {
+      width: 100%;
+      height: 600px;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .reels-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── CONTACT ── */
     #contacto {
       background: var(--surface);
@@ -433,6 +455,7 @@
     <li><a href="#sobre-mi">Sobre mí</a></li>
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#dron">Dron</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
 </nav>
@@ -564,6 +587,23 @@
       </div>
       <div class="photo-item" onclick="openLightbox('imgs/photo9.jpg')">
         <img src="imgs/photo9.jpg" alt="Next Pampa 2.0 detalle">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRON -->
+<section id="dron">
+  <div style="max-width:1200px; margin:0 auto;">
+    <p class="section-eyebrow">Filmación con Dron</p>
+    <h2>Vista <strong>aérea</strong></h2>
+    <p style="color:var(--muted); margin-bottom: 48px; max-width:480px;">Perspectivas únicas desde el aire que muestran la escala y el entorno de cada proyecto.</p>
+    <div class="reels-grid">
+      <div class="reel-wrap">
+        <iframe src="https://www.instagram.com/reel/DNymjpD4irq/embed/" frameborder="0" scrolling="no" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="reel-wrap">
+        <iframe src="https://www.instagram.com/reel/DCmxqpXpsJj/embed/" frameborder="0" scrolling="no" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
     </div>
   </div>
