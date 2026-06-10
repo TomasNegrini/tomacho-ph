@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomás Negrini — Fotografía Arquitectónica</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0c0c0c;
+      --surface: #141414;
+      --border: #222;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #c8a97e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(12,12,12,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('imgs/photo1.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 48px 64px;
+      max-width: 900px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 300;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 strong { font-weight: 700; }
+    .hero p {
+      font-size: 16px;
+      color: rgba(240,240,240,0.7);
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .hero-cta:hover { opacity: 0.85; }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollLine 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 48px; }
+    .section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    h2 strong { font-weight: 700; }
+
+    /* ── ABOUT ── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-text p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .about-img {
+      position: relative;
+    }
+    .about-img img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+    }
+    .about-img::before {
+      content: '';
+      position: absolute;
+      top: -16px; right: -16px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--border);
+      z-index: -1;
+    }
+
+    /* ── SERVICES ── */
+    #servicios { background: var(--surface); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .service-card {
+      background: var(--bg);
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .service-card:hover { background: #181818; }
+    .service-num {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: color 0.3s;
+    }
+    .service-card:hover .service-num { color: var(--accent); }
+    .service-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .service-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .portfolio-header p { color: var(--muted); font-size: 13px; max-width: 300px; text-align: right; }
+
+    .project {
+      max-width: 1200px;
+      margin: 0 auto 100px;
+    }
+    .project-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .project-label h3 { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+    .project-label span { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+    .project-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .grid-featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 360px 240px;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .grid-featured .main { grid-row: 1 / 3; }
+    .grid-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .photo-item {
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease, filter 0.3s ease;
+      filter: grayscale(10%);
+    }
+    .photo-item:hover img {
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+    .grid-row .photo-item { height: 280px; }
+
+    /* ── CONTACT ── */
+    #contacto {
+      background: var(--surface);
+      text-align: center;
+    }
+    #contacto .section-eyebrow { text-align: center; }
+    #contacto h2 { text-align: center; margin-bottom: 8px; }
+    #contacto > p {
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 48px;
+      font-size: 15px;
+    }
+    .contact-options {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-btn.primary {
+      background: var(--accent);
+      color: #000;
+    }
+    .contact-btn.primary:hover { opacity: 0.85; }
+    .contact-btn.secondary {
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .contact-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 12px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 28px;
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 64px 24px; }
+      .hero-content { padding: 0 24px 48px; }
+      .scroll-hint { display: none; }
+      .about { grid-template-columns: 1fr; gap: 40px; }
+      .about-img { display: none; }
+      .services-grid { grid-template-columns: 1fr; gap: 2px; }
+      .grid-featured { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .grid-featured .main { grid-row: auto; height: 280px; }
+      .grid-featured .photo-item { height: 220px; }
+      .grid-row { grid-template-columns: 1fr; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .portfolio-header p { text-align: left; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Tomás Negrini</a>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Fotografía Arquitectónica · Buenos Aires</span>
+    <h1><strong>Tomás</strong><br>Negrini</h1>
+    <p>Fotografía y filmación arquitectónica. Documentación visual de proyectos desde el inicio hasta la entrega final.</p>
+    <a href="#portfolio" class="hero-cta">Ver portfolio</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</div>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi">
+  <div class="about">
+    <div class="about-text">
+      <p class="section-eyebrow">Sobre mí</p>
+      <h2><strong>Fotografía</strong> que<br>documenta el proceso</h2>
+      <p>Soy fotógrafo especializado en arquitectura y avance de obra. Mi trabajo consiste en registrar cada etapa de la construcción con precisión y calidad visual, generando un archivo fotográfico completo para desarrolladoras, estudios de arquitectura y constructoras.</p>
+      <p>Trabajo con equipos profesionales y dron para capturar tanto los detalles constructivos como las perspectivas aéreas que muestran la escala real de cada proyecto.</p>
+    </div>
+    <div class="about-img">
+      <img src="imgs/photo7.jpg" alt="Fotografía arquitectónica">
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div style="max-width:1200px; margin:0 auto;">
+    <p class="section-eyebrow">Servicios</p>
+    <h2>Lo que <strong>ofrezco</strong></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <h3>Fotografía Arquitectónica</h3>
+      <p>Registro fotográfico profesional de proyectos en construcción y obra terminada. Entrega de imágenes en alta resolución optimizadas para uso editorial y comercial.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <h3>Filmación con Dron</h3>
+      <p>Tomas aéreas que muestran la escala, el entorno y el avance de cada proyecto. Perspectivas únicas que complementan la documentación a nivel suelo.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <h3>Avance de Obra</h3>
+      <p>Visitas periódicas para documentar el progreso mes a mes. Generación de un archivo visual completo del ciclo de vida del proyecto, desde excavación hasta entrega.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <p class="section-eyebrow">Portfolio</p>
+      <h2>Proyectos <strong>recientes</strong></h2>
+    </div>
+    <p>Documentación visual de obras en Buenos Aires, Argentina.</p>
+  </div>
+
+  <!-- Proyecto 1 -->
+  <div class="project">
+    <div class="project-label">
+      <h3>HER Aráoz</h3>
+      <span>2025 — 2026</span>
+    </div>
+    <div class="grid-featured">
+      <div class="photo-item main" onclick="openLightbox('imgs/photo1.jpg')">
+        <img src="imgs/photo1.jpg" alt="HER Aráoz">
+      </div>
+      <div class="photo-item" onclick="openLightbox('imgs/photo2.jpg')">
+        <img src="imgs/photo2.jpg" alt="HER Aráoz interior">
+      </div>
+      <div class="photo-item" onclick="openLightbox('imgs/photo3.jpg')">
+        <img src="imgs/photo3.jpg" alt="HER Aráoz detalle">
+      </div>
+    </div>
+  </div>
+
+  <!-- Proyecto 2 -->
+  <div class="project">
+    <div class="project-label">
+      <h3>HER El Salvador</h3>
+      <span>2025 — 2026</span>
+    </div>
+    <div class="grid-featured">
+      <div class="photo-item main" onclick="openLightbox('imgs/photo4.jpg')">
+        <img src="imgs/photo4.jpg" alt="HER El Salvador">
+      </div>
+      <div class="photo-item" onclick="openLightbox('imgs/photo5.jpg')">
+        <img src="imgs/photo5.jpg" alt="HER El Salvador piscina">
+      </div>
+      <div class="photo-item" onclick="openLightbox('imgs/photo6.jpg')">
+        <img src="imgs/photo6.jpg" alt="HER El Salvador detalle">
+      </div>
+    </div>
+  </div>
+
+  <!-- Proyecto 3 -->
+  <div class="project">
+    <div class="project-label">
+      <h3>Next Pampa 2.0</h3>
+      <span>2024 — 2026</span>
+    </div>
+    <div class="grid-featured">
+      <div class="photo-item main" onclick="openLightbox('imgs/photo7.jpg')">
+        <img src="imgs/photo7.jpg" alt="Next Pampa 2.0">
+      </div>
+      <div class="photo-item" onclick="openLightbox('imgs/photo8.jpg')">
+        <img src="imgs/photo8.jpg" alt="Next Pampa 2.0 interior">
+      </div>
+      <div class="photo-item" onclick="openLightbox('imgs/photo9.jpg')">
+        <img src="imgs/photo9.jpg" alt="Next Pampa 2.0 detalle">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <p class="section-eyebrow">Contacto</p>
+  <h2>Hablemos de tu <strong>proyecto</strong></h2>
+  <p>Disponible para nuevos proyectos en Buenos Aires y alrededores.</p>
+  <div class="contact-options">
+    <a href="mailto:negrinitomas@gmail.com" class="contact-btn primary">
+      ✉ negrinitomas@gmail.com
+    </a>
+    <a href="https://www.instagram.com/tomacho.ph/" target="_blank" class="contact-btn secondary">
+      ↗ @tomacho.ph
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Tomás Negrini · Fotografía Arquitectónica</p>
+  <a href="https://www.instagram.com/tomacho.ph/" target="_blank">Instagram</a>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hero image parallax + load animation
+  const heroBg = document.getElementById('heroBg');
+  const heroImg = new Image();
+  heroImg.onload = () => {
+    heroBg.style.backgroundImage = `url('imgs/photo1.jpg')`;
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+  };
+  heroImg.src = 'imgs/photo1.jpg';
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    heroBg.style.transform = `scale(1) translateY(${scrolled * 0.3}px)`;
+  });
+
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.project, .service-card, .about').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
