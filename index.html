@@ -71,10 +71,7 @@
       align-items: flex-end;
       overflow: hidden;
     }
-    .hero-slides {
-      position: absolute;
-      inset: 0;
-    }
+    .hero-slides { position: absolute; inset: 0; }
     .hero-slide {
       position: absolute;
       inset: 0;
@@ -84,9 +81,6 @@
       transition: opacity 1.2s ease;
     }
     .hero-slide.active { opacity: 1; }
-    .hero-bg {
-      display: none;
-    }
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -135,7 +129,6 @@
       transition: opacity 0.2s;
     }
     .hero-cta:hover { opacity: 0.85; }
-
     .hero-dots {
       position: absolute;
       bottom: 36px;
@@ -153,7 +146,6 @@
       transition: background 0.3s, transform 0.3s;
     }
     .dot.active { background: var(--accent); transform: scale(1.3); }
-
     .scroll-hint {
       position: absolute;
       bottom: 32px;
@@ -211,9 +203,7 @@
       line-height: 1.8;
       margin-bottom: 16px;
     }
-    .about-img {
-      position: relative;
-    }
+    .about-img { position: relative; }
     .about-img img {
       width: 100%;
       height: 520px;
@@ -258,11 +248,7 @@
       transition: color 0.3s;
     }
     .service-card:hover .service-num { color: var(--accent); }
-    .service-card h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
+    .service-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
     .service-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
 
     /* ── PORTFOLIO ── */
@@ -277,10 +263,7 @@
     }
     .portfolio-header p { color: var(--muted); font-size: 13px; max-width: 300px; text-align: right; }
 
-    .project {
-      max-width: 1200px;
-      margin: 0 auto 100px;
-    }
+    .project { max-width: 1200px; margin: 0 auto 100px; }
     .project-label {
       display: flex;
       align-items: center;
@@ -299,11 +282,15 @@
       margin-bottom: 4px;
     }
     .grid-featured .main { grid-row: 1 / 3; }
-    .grid-row {
+
+    .grid-thirds {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 4px;
+      margin-bottom: 4px;
     }
+    .grid-thirds .photo-item { height: 260px; }
+
     .photo-item {
       overflow: hidden;
       cursor: pointer;
@@ -320,9 +307,7 @@
       transform: scale(1.04);
       filter: grayscale(0%);
     }
-    .grid-row .photo-item { height: 280px; }
 
-    /* ── REELS ── */
     /* ── REELS ── */
     .reels-grid {
       display: grid;
@@ -342,10 +327,6 @@
       height: 560px;
       object-fit: cover;
       display: block;
-    }
-    @media (max-width: 768px) {
-      .reels-grid { grid-template-columns: 1fr; }
-      .reel-wrap video { height: 420px; }
     }
 
     /* ── CONTACT ── */
@@ -379,15 +360,9 @@
       text-decoration: none;
       transition: all 0.2s;
     }
-    .contact-btn.primary {
-      background: var(--accent);
-      color: #000;
-    }
+    .contact-btn.primary { background: var(--accent); color: #000; }
     .contact-btn.primary:hover { opacity: 0.85; }
-    .contact-btn.secondary {
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
+    .contact-btn.secondary { border: 1px solid var(--border); color: var(--text); }
     .contact-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ── FOOTER ── */
@@ -429,6 +404,22 @@
       transition: color 0.2s;
     }
     .lightbox-close:hover { color: var(--text); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 36px;
+      cursor: pointer;
+      padding: 16px;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .lightbox-nav:hover { color: #fff; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -443,10 +434,14 @@
       .grid-featured { grid-template-columns: 1fr; grid-template-rows: auto; }
       .grid-featured .main { grid-row: auto; height: 280px; }
       .grid-featured .photo-item { height: 220px; }
-      .grid-row { grid-template-columns: 1fr; }
+      .grid-thirds { grid-template-columns: 1fr; }
+      .grid-thirds .photo-item { height: 220px; }
+      .reels-grid { grid-template-columns: 1fr; }
+      .reel-wrap video { height: 420px; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 8px; }
       .portfolio-header p { text-align: left; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
+      .lightbox-nav { display: none; }
     }
   </style>
 </head>
@@ -498,7 +493,7 @@
       <p>Trabajo con equipos profesionales y dron para capturar tanto los detalles constructivos como las perspectivas aéreas que muestran la escala real de cada proyecto.</p>
     </div>
     <div class="about-img">
-      <img src="imgs/photo7.jpg" alt="Fotografía arquitectónica">
+      <img src="imgs/fitz-01.jpg" alt="Fotografía arquitectónica">
     </div>
   </div>
 </section>
@@ -538,60 +533,139 @@
     <p>Documentación visual de obras en Buenos Aires, Argentina.</p>
   </div>
 
-  <!-- Proyecto 1 -->
+  <!-- HER Fitz Roy -->
+  <div class="project">
+    <div class="project-label">
+      <h3>HER Fitz Roy</h3>
+      <span>2025 — 2026</span>
+    </div>
+    <div class="grid-featured">
+      <div class="photo-item main" onclick="openLightbox('imgs/fitz-01.jpg',0,'fitz')">
+        <img src="imgs/fitz-01.jpg" alt="HER Fitz Roy interior">
+      </div>
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-02.jpg',1,'fitz')">
+        <img src="imgs/fitz-02.jpg" alt="HER Fitz Roy fachada">
+      </div>
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-03.jpg',2,'fitz')">
+        <img src="imgs/fitz-03.jpg" alt="HER Fitz Roy restaurante">
+      </div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-04.jpg',3,'fitz')"><img src="imgs/fitz-04.jpg" alt="HER Fitz Roy fachada árbol"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-05.jpg',4,'fitz')"><img src="imgs/fitz-05.jpg" alt="HER Fitz Roy cartel"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-06.jpg',5,'fitz')"><img src="imgs/fitz-06.jpg" alt="HER Fitz Roy entrada"></div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-07.jpg',6,'fitz')"><img src="imgs/fitz-07.jpg" alt="HER Fitz Roy habitación vista ciudad"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-08.jpg',7,'fitz')"><img src="imgs/fitz-08.jpg" alt="HER Fitz Roy estudio"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-09.jpg',8,'fitz')"><img src="imgs/fitz-09.jpg" alt="HER Fitz Roy balcón"></div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-10.jpg',9,'fitz')"><img src="imgs/fitz-10.jpg" alt="HER Fitz Roy escalera mural"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-11.jpg',10,'fitz')"><img src="imgs/fitz-11.jpg" alt="HER Fitz Roy pantalla decorativa"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/fitz-12.jpg',11,'fitz')"><img src="imgs/fitz-12.jpg" alt="HER Fitz Roy detalle panel"></div>
+    </div>
+  </div>
+
+  <!-- HER Aráoz -->
   <div class="project">
     <div class="project-label">
       <h3>HER Aráoz</h3>
       <span>2025 — 2026</span>
     </div>
     <div class="grid-featured">
-      <div class="photo-item main" onclick="openLightbox('imgs/photo1.jpg')">
-        <img src="imgs/photo1.jpg" alt="HER Aráoz">
+      <div class="photo-item main" onclick="openLightbox('imgs/araoz-01.jpg',0,'araoz')">
+        <img src="imgs/araoz-01.jpg" alt="HER Aráoz fachada">
       </div>
-      <div class="photo-item" onclick="openLightbox('imgs/photo2.jpg')">
-        <img src="imgs/photo2.jpg" alt="HER Aráoz interior">
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-02.jpg',1,'araoz')">
+        <img src="imgs/araoz-02.jpg" alt="HER Aráoz terraza panorama">
       </div>
-      <div class="photo-item" onclick="openLightbox('imgs/photo3.jpg')">
-        <img src="imgs/photo3.jpg" alt="HER Aráoz detalle">
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-03.jpg',2,'araoz')">
+        <img src="imgs/araoz-03.jpg" alt="HER Aráoz contrapicado">
       </div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-04.jpg',3,'araoz')"><img src="imgs/araoz-04.jpg" alt="HER Aráoz fachada árboles"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-05.jpg',4,'araoz')"><img src="imgs/araoz-05.jpg" alt="HER Aráoz fachada urbana"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-06.jpg',5,'araoz')"><img src="imgs/araoz-06.jpg" alt="HER Aráoz interior ventana"></div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-07.jpg',6,'araoz')"><img src="imgs/araoz-07.jpg" alt="HER Aráoz tabiques"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-08.jpg',7,'araoz')"><img src="imgs/araoz-08.jpg" alt="HER Aráoz operario en obra"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-09.jpg',8,'araoz')"><img src="imgs/araoz-09.jpg" alt="HER Aráoz interior luz natural"></div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-10.jpg',9,'araoz')"><img src="imgs/araoz-10.jpg" alt="HER Aráoz losa panorama"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-11.jpg',10,'araoz')"><img src="imgs/araoz-11.jpg" alt="HER Aráoz detalle fachada"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/araoz-12.jpg',11,'araoz')"><img src="imgs/araoz-12.jpg" alt="HER Aráoz fachada desde abajo"></div>
     </div>
   </div>
 
-  <!-- Proyecto 2 -->
+  <!-- HER El Salvador -->
   <div class="project">
     <div class="project-label">
       <h3>HER El Salvador</h3>
       <span>2025 — 2026</span>
     </div>
     <div class="grid-featured">
-      <div class="photo-item main" onclick="openLightbox('imgs/photo4.jpg')">
-        <img src="imgs/photo4.jpg" alt="HER El Salvador">
+      <div class="photo-item main" onclick="openLightbox('imgs/salvador-01.jpg',0,'salvador')">
+        <img src="imgs/salvador-01.jpg" alt="HER El Salvador fachada">
       </div>
-      <div class="photo-item" onclick="openLightbox('imgs/photo5.jpg')">
-        <img src="imgs/photo5.jpg" alt="HER El Salvador piscina">
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-02.jpg',1,'salvador')">
+        <img src="imgs/salvador-02.jpg" alt="HER El Salvador fachada contrapicado">
       </div>
-      <div class="photo-item" onclick="openLightbox('imgs/photo6.jpg')">
-        <img src="imgs/photo6.jpg" alt="HER El Salvador detalle">
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-03.jpg',2,'salvador')">
+        <img src="imgs/salvador-03.jpg" alt="HER El Salvador árbol vidrio">
       </div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-04.jpg',3,'salvador')"><img src="imgs/salvador-04.jpg" alt="HER El Salvador follaje"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-05.jpg',4,'salvador')"><img src="imgs/salvador-05.jpg" alt="HER El Salvador fachada abstracta"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-06.jpg',5,'salvador')"><img src="imgs/salvador-06.jpg" alt="HER El Salvador balcón plantas"></div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-07.jpg',6,'salvador')"><img src="imgs/salvador-07.jpg" alt="HER El Salvador piscina panorama"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-08.jpg',7,'salvador')"><img src="imgs/salvador-08.jpg" alt="HER El Salvador jardín balcón"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-09.jpg',8,'salvador')"><img src="imgs/salvador-09.jpg" alt="HER El Salvador interior carpintería"></div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-10.jpg',9,'salvador')"><img src="imgs/salvador-10.jpg" alt="HER El Salvador piscina azulejos"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-11.jpg',10,'salvador')"><img src="imgs/salvador-11.jpg" alt="HER El Salvador piscina interior"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/salvador-12.jpg',11,'salvador')"><img src="imgs/salvador-12.jpg" alt="HER El Salvador terraza"></div>
     </div>
   </div>
 
-  <!-- Proyecto 3 -->
+  <!-- Next Pampa 2.0 -->
   <div class="project">
     <div class="project-label">
       <h3>Next Pampa 2.0</h3>
       <span>2024 — 2026</span>
     </div>
     <div class="grid-featured">
-      <div class="photo-item main" onclick="openLightbox('imgs/photo7.jpg')">
-        <img src="imgs/photo7.jpg" alt="Next Pampa 2.0">
+      <div class="photo-item main" onclick="openLightbox('imgs/pampa-01.jpg',0,'pampa')">
+        <img src="imgs/pampa-01.jpg" alt="Next Pampa 2.0">
       </div>
-      <div class="photo-item" onclick="openLightbox('imgs/photo8.jpg')">
-        <img src="imgs/photo8.jpg" alt="Next Pampa 2.0 interior">
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-02.jpg',1,'pampa')">
+        <img src="imgs/pampa-02.jpg" alt="Next Pampa 2.0 fachada cartel">
       </div>
-      <div class="photo-item" onclick="openLightbox('imgs/photo9.jpg')">
-        <img src="imgs/photo9.jpg" alt="Next Pampa 2.0 detalle">
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-03.jpg',2,'pampa')">
+        <img src="imgs/pampa-03.jpg" alt="Next Pampa 2.0 ventana parque">
       </div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-04.jpg',3,'pampa')"><img src="imgs/pampa-04.jpg" alt="Next Pampa 2.0 fachada lateral"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-05.jpg',4,'pampa')"><img src="imgs/pampa-05.jpg" alt="Next Pampa 2.0 fachada calle"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-06.jpg',5,'pampa')"><img src="imgs/pampa-06.jpg" alt="Next Pampa 2.0 planta libre columnas"></div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-07.jpg',6,'pampa')"><img src="imgs/pampa-07.jpg" alt="Next Pampa 2.0 interior revocado"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-08.jpg',7,'pampa')"><img src="imgs/pampa-08.jpg" alt="Next Pampa 2.0 vista panorámica"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-09.jpg',8,'pampa')"><img src="imgs/pampa-09.jpg" alt="Next Pampa 2.0 operario silueta ciudad"></div>
+    </div>
+    <div class="grid-thirds">
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-10.jpg',9,'pampa')"><img src="imgs/pampa-10.jpg" alt="Next Pampa 2.0 operario parque"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-11.jpg',10,'pampa')"><img src="imgs/pampa-11.jpg" alt="Next Pampa 2.0 terraza parque"></div>
+      <div class="photo-item" onclick="openLightbox('imgs/pampa-12.jpg',11,'pampa')"><img src="imgs/pampa-12.jpg" alt="Next Pampa 2.0 borde balcón"></div>
     </div>
   </div>
 </section>
@@ -638,9 +712,11 @@
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox" id="lightbox">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)">&#8249;</button>
+  <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)">&#8250;</button>
 </div>
 
 <script>
@@ -654,7 +730,6 @@
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.dot');
   let current = 0;
-
   function goTo(n) {
     slides[current].classList.remove('active');
     dots[current].classList.remove('active');
@@ -662,11 +737,10 @@
     slides[current].classList.add('active');
     dots[current].classList.add('active');
   }
-
   dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
   setInterval(() => goTo(current + 1), 5000);
 
-  // Parallax on scroll
+  // Parallax
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY;
     document.querySelectorAll('.hero-slide').forEach(s => {
@@ -674,8 +748,19 @@
     });
   });
 
-  // Lightbox
-  function openLightbox(src) {
+  // Lightbox con navegación
+  const galleries = {
+    fitz:     Array.from({length:12}, (_,i) => `imgs/fitz-${String(i+1).padStart(2,'0')}.jpg`),
+    araoz:    Array.from({length:12}, (_,i) => `imgs/araoz-${String(i+1).padStart(2,'0')}.jpg`),
+    salvador: Array.from({length:12}, (_,i) => `imgs/salvador-${String(i+1).padStart(2,'0')}.jpg`),
+    pampa:    Array.from({length:12}, (_,i) => `imgs/pampa-${String(i+1).padStart(2,'0')}.jpg`),
+  };
+  let currentGallery = [];
+  let currentIndex = 0;
+
+  function openLightbox(src, idx, gallery) {
+    currentGallery = galleries[gallery] || [src];
+    currentIndex = idx;
     document.getElementById('lightboxImg').src = src;
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -684,8 +769,18 @@
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
+  function lightboxStep(dir) {
+    currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+    document.getElementById('lightboxImg').src = currentGallery[currentIndex];
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
   document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') lightboxStep(1);
+    if (e.key === 'ArrowLeft') lightboxStep(-1);
   });
 
   // Fade-in on scroll
