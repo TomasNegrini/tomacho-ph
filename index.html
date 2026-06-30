@@ -301,17 +301,17 @@
       content: '';
       position: absolute;
       bottom: 10px;
-      right: 10px;
-      width: 90px;
-      height: 20px;
+      left: 10px;
+      width: 72px;
+      height: 16px;
       background-image: url('logos/logo-blanco.svg');
       background-size: contain;
       background-repeat: no-repeat;
-      background-position: right bottom;
-      opacity: 0.65;
+      background-position: left bottom;
+      opacity: 0.32;
       pointer-events: none;
       z-index: 2;
-      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
     }
     .photo-item img {
       width: 100%;
@@ -1026,20 +1026,30 @@
     const photo = new Image();
     photo.onload = function() {
       if (lightboxGen !== myGen) return;
+      const W = photo.naturalWidth;
+      const H = photo.naturalHeight;
+      const isPortrait = H > W;
+
       const canvas = document.createElement('canvas');
-      canvas.width = photo.naturalWidth;
-      canvas.height = photo.naturalHeight;
+      canvas.width  = W;
+      canvas.height = H;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(photo, 0, 0);
 
       const logo = new Image();
       logo.onload = function() {
         if (lightboxGen !== myGen) return;
-        const logoW = Math.round(photo.naturalWidth * 0.17);
+
+        // Portrait: escala más alta porque la foto se muestra más pequeña en pantalla
+        // Landscape: 8% del ancho; Portrait: 20% del ancho para compensar la diferencia de escala
+        const pct  = isPortrait ? 0.20 : 0.08;
+        const logoW = Math.round(W * pct);
         const logoH = Math.round(logoW * 40 / 180);
-        const pad   = Math.round(photo.naturalWidth * 0.025);
-        ctx.globalAlpha = 0.7;
-        ctx.drawImage(logo, photo.naturalWidth - logoW - pad, photo.naturalHeight - logoH - pad, logoW, logoH);
+        const pad   = Math.round(Math.min(W, H) * 0.025);
+
+        // Esquina inferior-izquierda
+        ctx.globalAlpha = 0.35;
+        ctx.drawImage(logo, pad, H - logoH - pad, logoW, logoH);
         try { lightboxImg.src = canvas.toDataURL('image/jpeg', 0.92); } catch(e) {}
       };
       logo.src = 'logos/logo-blanco.svg';
