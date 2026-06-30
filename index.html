@@ -470,7 +470,6 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 16px 24px; }
-      .nav-links { display: none; }
       section { padding: 64px 24px; }
       .hero-content { padding: 0 24px 48px; }
       .scroll-hint { display: none; }
@@ -482,14 +481,19 @@
       .grid-featured .photo-item { height: 220px; }
       .grid-thirds { grid-template-columns: 1fr; }
       .grid-thirds .photo-item { height: 220px; }
-      .reels-grid { grid-template-columns: 1fr; }
-      .reels-grid-3 { grid-template-columns: 1fr; }
-      .reel-wrap video { height: 420px; }
-      .reels-grid-3 .reel-wrap video { height: 280px; }
+      .reels-grid-3 { grid-template-columns: 1fr 1fr; }
+      .reels-grid-3 .reel-wrap video { height: 260px; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 8px; }
       .portfolio-header p { text-align: left; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
       .lightbox-nav { display: none; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .reels-grid { grid-template-columns: 1fr; }
+      .reels-grid-3 { grid-template-columns: 1fr; }
+      .reel-wrap video { height: 380px; }
+      .reels-grid-3 .reel-wrap video { height: 240px; }
     }
   </style>
 </head>
