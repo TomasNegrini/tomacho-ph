@@ -297,6 +297,22 @@
       cursor: pointer;
       position: relative;
     }
+    .photo-item::before {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 90px;
+      height: 20px;
+      background-image: url('logos/logo-blanco.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      opacity: 0.65;
+      pointer-events: none;
+      z-index: 2;
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+    }
     .photo-item img {
       width: 100%;
       height: 100%;
@@ -1000,11 +1016,41 @@
   };
   let currentGallery = [];
   let currentIndex = 0;
+  let lightboxGen = 0;
+
+  function applyWatermarkToLightbox(src) {
+    const myGen = ++lightboxGen;
+    const lightboxImg = document.getElementById('lightboxImg');
+    lightboxImg.src = src; // muestra la imagen inmediatamente (desde caché)
+
+    const photo = new Image();
+    photo.onload = function() {
+      if (lightboxGen !== myGen) return;
+      const canvas = document.createElement('canvas');
+      canvas.width = photo.naturalWidth;
+      canvas.height = photo.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(photo, 0, 0);
+
+      const logo = new Image();
+      logo.onload = function() {
+        if (lightboxGen !== myGen) return;
+        const logoW = Math.round(photo.naturalWidth * 0.17);
+        const logoH = Math.round(logoW * 40 / 180);
+        const pad   = Math.round(photo.naturalWidth * 0.025);
+        ctx.globalAlpha = 0.7;
+        ctx.drawImage(logo, photo.naturalWidth - logoW - pad, photo.naturalHeight - logoH - pad, logoW, logoH);
+        try { lightboxImg.src = canvas.toDataURL('image/jpeg', 0.92); } catch(e) {}
+      };
+      logo.src = 'logos/logo-blanco.svg';
+    };
+    photo.src = src;
+  }
 
   function openLightbox(src, idx, gallery) {
     currentGallery = galleries[gallery] || [src];
     currentIndex = idx;
-    document.getElementById('lightboxImg').src = src;
+    applyWatermarkToLightbox(src);
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1014,7 +1060,7 @@
   }
   function lightboxStep(dir) {
     currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
-    document.getElementById('lightboxImg').src = currentGallery[currentIndex];
+    applyWatermarkToLightbox(currentGallery[currentIndex]);
   }
   document.getElementById('lightbox').addEventListener('click', function(e) {
     if (e.target === this) closeLightbox();
