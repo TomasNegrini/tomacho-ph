@@ -315,6 +315,13 @@
       gap: 24px;
       max-width: 1000px;
     }
+    .reels-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1200px;
+      margin-bottom: 16px;
+    }
     .reel-wrap {
       border-radius: 12px;
       overflow: hidden;
@@ -328,6 +335,7 @@
       object-fit: cover;
       display: block;
     }
+    .reels-grid-3 .reel-wrap video { height: 360px; }
 
     /* ── CONTACT ── */
     #contacto {
@@ -437,7 +445,9 @@
       .grid-thirds { grid-template-columns: 1fr; }
       .grid-thirds .photo-item { height: 220px; }
       .reels-grid { grid-template-columns: 1fr; }
+      .reels-grid-3 { grid-template-columns: 1fr; }
       .reel-wrap video { height: 420px; }
+      .reels-grid-3 .reel-wrap video { height: 280px; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 8px; }
       .portfolio-header p { text-align: left; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
@@ -675,7 +685,29 @@
   <div style="max-width:1200px; margin:0 auto;">
     <p class="section-eyebrow">Filmación con Dron</p>
     <h2>Vista <strong>aérea</strong></h2>
-    <p style="color:var(--muted); margin-bottom: 48px; max-width:480px;">Perspectivas únicas desde el aire que muestran la escala y el entorno de cada proyecto.</p>
+    <p style="color:var(--muted); margin-bottom: 48px; max-width:480px;">Perspectivas únicas desde el aire — arquitectura, entorno y eventos deportivos.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px; max-width:1000px; margin-bottom:48px;">
+      <div class="photo-item" style="height:320px" onclick="openLightbox('imgs/rugby-01.jpg',0,'rugby')">
+        <img src="imgs/rugby-01.jpg" alt="Fotografía aérea cenital scrum">
+      </div>
+      <div class="photo-item" style="height:320px" onclick="openLightbox('imgs/rugby-02.jpg',1,'rugby')">
+        <img src="imgs/rugby-02.jpg" alt="Fotografía aérea dusk rugby">
+      </div>
+    </div>
+
+    <div class="reels-grid-3">
+      <div class="reel-wrap">
+        <video src="imgs/rugby-vid-01.mp4" controls playsinline loop muted></video>
+      </div>
+      <div class="reel-wrap">
+        <video src="imgs/rugby-vid-02.mp4" controls playsinline loop muted></video>
+      </div>
+      <div class="reel-wrap">
+        <video src="imgs/rugby-vid-03.mp4" controls playsinline loop muted></video>
+      </div>
+    </div>
+
     <div class="reels-grid">
       <div class="reel-wrap">
         <video src="imgs/dron1.mp4" controls playsinline loop muted></video>
@@ -754,6 +786,7 @@
     araoz:    Array.from({length:12}, (_,i) => `imgs/araoz-${String(i+1).padStart(2,'0')}.jpg`),
     salvador: Array.from({length:12}, (_,i) => `imgs/salvador-${String(i+1).padStart(2,'0')}.jpg`),
     pampa:    Array.from({length:12}, (_,i) => `imgs/pampa-${String(i+1).padStart(2,'0')}.jpg`),
+    rugby:    ['imgs/rugby-01.jpg', 'imgs/rugby-02.jpg'],
   };
   let currentGallery = [];
   let currentIndex = 0;
