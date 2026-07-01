@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caminatas Urbanas — tomacho.ph</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5' stroke='%23c8a97e' stroke-width='1.5' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='14' cy='14' r='4.5' stroke='%23c8a97e' stroke-width='1' fill='none'/%3E%3Ccircle cx='14' cy='14' r='1.5' fill='%23c8a97e'/%3E%3C/svg%3E">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0c0c0c;
+      --surface: #141414;
+      --border: #222;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #c8a97e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(12,12,12,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { text-decoration: none; color: var(--text); }
+    .back-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── HEADER ── */
+    .urb-header { padding: 96px 48px 48px; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .urb-header h1 {
+      font-size: 40px;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+    .urb-header h1 strong { font-weight: 600; color: var(--accent); }
+    .urb-header p { color: var(--muted); max-width: 520px; }
+
+    /* ── GRID (masonry que crece) ── */
+    .urb-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 96px;
+      column-count: 3;
+      column-gap: 4px;
+    }
+    .urb-item {
+      break-inside: avoid;
+      margin-bottom: 4px;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      background: var(--surface);
+    }
+    .urb-item img {
+      width: 100%;
+      display: block;
+      filter: grayscale(10%);
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    .urb-item:hover img { transform: scale(1.03); filter: grayscale(0%); }
+
+    /* ── EMPTY STATE ── */
+    .urb-empty {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 48px 140px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .urb-empty svg { opacity: 0.4; margin-bottom: 24px; }
+    .urb-empty p { max-width: 380px; margin: 0 auto; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 28px;
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: var(--text); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 36px;
+      cursor: pointer;
+      padding: 16px;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .lightbox-nav:hover { color: #fff; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    footer a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .urb-grid { column-count: 2; }
+    }
+    @media (max-width: 560px) {
+      nav { padding: 16px 24px; }
+      .urb-header { padding: 72px 24px 32px; }
+      .urb-header h1 { font-size: 30px; }
+      .urb-grid { column-count: 1; padding: 0 24px 64px; }
+      .urb-empty { padding: 24px 24px 96px; }
+      .lightbox-nav { font-size: 28px; padding: 12px; }
+      .lightbox-prev { left: 4px; }
+      .lightbox-next { right: 4px; }
+      footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo" style="display:flex;align-items:center;gap:10px;">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5" stroke="#c8a97e" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+      <circle cx="14" cy="14" r="4.5" stroke="#c8a97e" stroke-width="1" fill="none"/>
+      <circle cx="14" cy="14" r="1.5" fill="#c8a97e"/>
+    </svg>
+    <span style="font-size:13px;font-weight:600;letter-spacing:1.5px;">tomacho<span style="color:#c8a97e;">.</span>ph</span>
+  </a>
+  <a href="../index.html" class="back-link">‹ Volver al portfolio</a>
+</nav>
+
+<div class="urb-header">
+  <p class="section-eyebrow">Fuera de obra</p>
+  <h1>Caminatas <strong>Urbanas</strong></h1>
+  <p>Fotos sueltas de caminatas por la ciudad — un espacio personal, actualizado de a poco.</p>
+</div>
+
+<div class="urb-grid" id="urbanGrid"></div>
+
+<div class="urb-empty" id="urbanEmpty">
+  <svg width="40" height="40" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5" stroke="#c8a97e" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+    <circle cx="14" cy="14" r="4.5" stroke="#c8a97e" stroke-width="1" fill="none"/>
+    <circle cx="14" cy="14" r="1.5" fill="#c8a97e"/>
+  </svg>
+  <p>Todavía no hay fotos acá — muy pronto voy a ir sumando lo que vaya sacando en mis caminatas por la ciudad.</p>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)">‹</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)">›</button>
+</div>
+
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5" stroke="#c8a97e" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+      <circle cx="14" cy="14" r="4.5" stroke="#c8a97e" stroke-width="1" fill="none"/>
+      <circle cx="14" cy="14" r="1.5" fill="#c8a97e"/>
+    </svg>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:1px;color:#f0f0f0;">tomacho<span style="color:#c8a97e;">.</span>ph</div>
+      <div style="font-size:11px;color:#555;margin-top:2px;">Caminatas Urbanas</div>
+    </div>
+  </div>
+  <a href="https://www.instagram.com/tomacho.ph/" target="_blank">Instagram</a>
+</footer>
+
+<script>
+  // ── Fotos de caminatas urbanas ──
+  // Para sumar una foto nueva: copiar el archivo a imgs/ y agregar una línea acá.
+  const urbanPhotos = [
+    { file: 'urbano-01.jpg', alt: 'Edificio con balcones ondulados' },
+    { file: 'urbano-02.jpg', alt: 'Fachada moderna con balcones verdes' },
+    { file: 'urbano-03.jpg', alt: 'Detalle textura de fachada tipo panal' },
+    { file: 'urbano-04.jpg', alt: 'Farol ornamentado en plaza' },
+    { file: 'urbano-05.jpg', alt: 'Fachada neoclásica con columnas' },
+    { file: 'urbano-06.jpg', alt: 'Balcón curvo al atardecer' },
+    { file: 'urbano-07.jpg', alt: 'Edificio ondulado en contraluz' },
+    { file: 'urbano-08.jpg', alt: 'Plaza con edificio de reloj' },
+    { file: 'urbano-09.jpg', alt: 'Esquina con cúpula y reloj' },
+    { file: 'urbano-10.jpg', alt: 'Edificio de esquina ornamentado' },
+    { file: 'urbano-11.jpg', alt: 'Cúpula del Palacio Barolo' },
+    { file: 'urbano-12.jpg', alt: 'Fachada del Palacio Barolo' },
+    { file: 'urbano-13.jpg', alt: 'Palacio de Tribunales' },
+    { file: 'urbano-14.jpg', alt: 'Fachada con columnas' },
+    { file: 'urbano-15.jpg', alt: 'Detalle de ventanas y balcones' },
+    { file: 'urbano-16.jpg', alt: 'Esquina estilo Beaux-Arts' },
+    { file: 'urbano-17.jpg', alt: 'Techo con mansarda' },
+    { file: 'urbano-18.jpg', alt: 'Esquina con estatuas' },
+    { file: 'urbano-19.jpg', alt: 'Fachada con columnata' },
+    { file: 'urbano-20.jpg', alt: 'Cúpula con antena' },
+    { file: 'urbano-21.jpg', alt: 'Campanario del Cabildo' },
+    { file: 'urbano-22.jpg', alt: 'Teatro Colón' },
+    { file: 'urbano-23.jpg', alt: 'Galerías Pacífico, arco de entrada' },
+    { file: 'urbano-24.jpg', alt: 'Galerías Pacífico, vitral' },
+    { file: 'urbano-25.jpg', alt: 'Salón con piano' },
+    { file: 'urbano-26.jpg', alt: 'Altar dorado' },
+    { file: 'urbano-27.jpg', alt: 'Óculo de cúpula' },
+    { file: 'urbano-28.jpg', alt: 'Nave con órgano' },
+    { file: 'urbano-29.jpg', alt: 'Puerta tallada' },
+    { file: 'urbano-30.jpg', alt: 'Casa Rosada' },
+    // Para sumar una foto nueva: copiar el archivo a imgs/ y agregar una línea acá.
+  ];
+
+  function renderUrbanGrid() {
+    const grid = document.getElementById('urbanGrid');
+    const empty = document.getElementById('urbanEmpty');
+    if (urbanPhotos.length === 0) {
+      grid.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.style.display = '';
+    grid.innerHTML = urbanPhotos.map((p, i) =>
+      `<div class="urb-item" onclick="openLightbox(${i})"><img src="imgs/${p.file}" alt="${p.alt || ''}" loading="lazy"></div>`
+    ).join('');
+  }
+  renderUrbanGrid();
+
+  // ── Lightbox con marca de agua (mismo criterio que el sitio principal) ──
+  let currentIndex = 0;
+  let lightboxGen = 0;
+
+  function applyWatermarkToLightbox(src) {
+    const myGen = ++lightboxGen;
+    const lightboxImg = document.getElementById('lightboxImg');
+    lightboxImg.src = src;
+
+    const photo = new Image();
+    photo.onload = function() {
+      if (lightboxGen !== myGen) return;
+      const W = photo.naturalWidth;
+      const H = photo.naturalHeight;
+      const isPortrait = H > W;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(photo, 0, 0);
+
+      const logo = new Image();
+      logo.onload = function() {
+        if (lightboxGen !== myGen) return;
+        const pct = isPortrait ? 0.20 : 0.08;
+        const logoW = Math.round(W * pct);
+        const logoH = Math.round(logoW * 40 / 180);
+        const pad = Math.round(Math.min(W, H) * 0.025);
+
+        ctx.globalAlpha = 0.35;
+        ctx.drawImage(logo, pad, H - logoH - pad, logoW, logoH);
+        try { lightboxImg.src = canvas.toDataURL('image/jpeg', 0.92); } catch(e) {}
+      };
+      logo.src = '../logos/logo-blanco.svg';
+    };
+    photo.src = src;
+  }
+
+  function openLightbox(idx) {
+    currentIndex = idx;
+    applyWatermarkToLightbox(`imgs/${urbanPhotos[idx].file}`);
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lightboxStep(dir) {
+    currentIndex = (currentIndex + dir + urbanPhotos.length) % urbanPhotos.length;
+    applyWatermarkToLightbox(`imgs/${urbanPhotos[currentIndex].file}`);
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'ArrowRight') lightboxStep(1);
+    if (e.key === 'ArrowLeft') lightboxStep(-1);
+  });
+</script>
+</body>
+</html>
