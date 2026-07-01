@@ -326,36 +326,51 @@
       filter: grayscale(0%);
     }
 
-    /* ── REELS ── */
-    .reels-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      max-width: 1000px;
-    }
-    .reels-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      max-width: 1200px;
-      margin-bottom: 16px;
-    }
-    .reel-wrap {
+    /* ── VIDEO CAROUSEL ── */
+    .video-carousel { max-width: 900px; margin: 0 auto; }
+    .vc-stage {
+      position: relative;
+      background: #000;
       border-radius: 12px;
       overflow: hidden;
-      background: #000;
       border: 1px solid var(--border);
-      position: relative;
+      height: 640px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .reel-wrap video {
-      width: 100%;
-      height: 560px;
-      object-fit: cover;
+    .vc-stage video {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
       display: block;
     }
-    .reels-grid-3 .reel-wrap video { height: 360px; }
-    .reels-grid .reel-wrap { aspect-ratio: 9/16; }
-    .reels-grid .reel-wrap video { height: 100%; }
+    .vc-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 36px;
+      cursor: pointer;
+      padding: 16px;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .vc-nav:hover { color: #fff; }
+    .vc-prev { left: 8px; }
+    .vc-next { right: 8px; }
+    .vc-dots { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+    .vc-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .vc-dot.active { background: var(--accent); transform: scale(1.3); }
 
     /* ── CONTACT ── */
     #contacto {
@@ -595,8 +610,7 @@
         justify-content: center;
       }
       .grid-featured .photo-item:last-child:hover::after { background: rgba(0,0,0,0.75); }
-      .reels-grid-3 { grid-template-columns: 1fr 1fr; }
-      .reels-grid-3 .reel-wrap video { height: 260px; }
+      .vc-stage { height: 420px; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 8px; }
       .portfolio-header p { text-align: left; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
@@ -607,10 +621,10 @@
     @media (max-width: 480px) {
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
-      .reels-grid { grid-template-columns: 1fr; }
-      .reels-grid-3 { grid-template-columns: 1fr; }
-      .reel-wrap video { height: 380px; }
-      .reels-grid-3 .reel-wrap video { height: 240px; }
+      .vc-stage { height: 320px; }
+      .vc-nav { font-size: 28px; padding: 12px; }
+      .vc-prev { left: 4px; }
+      .vc-next { right: 4px; }
     }
   </style>
 </head>
@@ -648,6 +662,7 @@
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#dron">Dron</a></li>
+    <li><a href="urbano/index.html">Caminatas Urbanas</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
@@ -664,6 +679,7 @@
     <a href="#servicios" onclick="closeMobileMenu()">Servicios</a>
     <a href="#portfolio" onclick="closeMobileMenu()">Portfolio</a>
     <a href="#dron"      onclick="closeMobileMenu()">Dron</a>
+    <a href="urbano/index.html">Caminatas Urbanas</a>
     <a href="#contacto"  onclick="closeMobileMenu()">Contacto</a>
   </div>
 </div>
@@ -901,25 +917,13 @@
       </div>
     </div>
 
-    <div class="reels-grid-3">
-      <div class="reel-wrap">
-        <video src="imgs/rugby-vid-01.mp4" controls playsinline loop muted></video>
+    <div class="video-carousel">
+      <div class="vc-stage">
+        <video id="vcVideo" controls playsinline loop muted></video>
+        <button class="vc-nav vc-prev" onclick="carouselStep(-1)" aria-label="Video anterior">‹</button>
+        <button class="vc-nav vc-next" onclick="carouselStep(1)" aria-label="Video siguiente">›</button>
       </div>
-      <div class="reel-wrap">
-        <video src="imgs/rugby-vid-02.mp4" controls playsinline loop muted></video>
-      </div>
-      <div class="reel-wrap">
-        <video src="imgs/rugby-vid-03.mp4" controls playsinline loop muted></video>
-      </div>
-    </div>
-
-    <div class="reels-grid">
-      <div class="reel-wrap">
-        <video src="imgs/dron1.mp4" controls playsinline loop muted></video>
-      </div>
-      <div class="reel-wrap">
-        <video src="imgs/dron2.mp4" controls playsinline loop muted></video>
-      </div>
+      <div class="vc-dots" id="vcDots"></div>
     </div>
   </div>
 </section>
@@ -1084,6 +1088,38 @@
     if (e.key === 'ArrowRight') lightboxStep(1);
     if (e.key === 'ArrowLeft') lightboxStep(-1);
   });
+
+  // Carrusel de videos dron
+  const dronVideos = [
+    'imgs/rugby-vid-01.mp4',
+    'imgs/rugby-vid-02.mp4',
+    'imgs/rugby-vid-03.mp4',
+    'imgs/dron1.mp4',
+    'imgs/dron2.mp4',
+  ];
+  let vcIndex = 0;
+  const vcVideoEl = document.getElementById('vcVideo');
+  const vcDotsEl = document.getElementById('vcDots');
+  function renderCarouselDots() {
+    vcDotsEl.innerHTML = dronVideos.map((_, i) =>
+      `<span class="vc-dot${i === vcIndex ? ' active' : ''}" onclick="carouselGoTo(${i})"></span>`
+    ).join('');
+  }
+  function loadCarouselVideo() {
+    vcVideoEl.pause();
+    vcVideoEl.src = dronVideos[vcIndex];
+    vcVideoEl.load();
+    renderCarouselDots();
+  }
+  function carouselStep(dir) {
+    vcIndex = (vcIndex + dir + dronVideos.length) % dronVideos.length;
+    loadCarouselVideo();
+  }
+  function carouselGoTo(i) {
+    vcIndex = i;
+    loadCarouselVideo();
+  }
+  loadCarouselVideo();
 
   // Mobile menu
   function openMobileMenu() {
