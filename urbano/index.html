@@ -317,6 +317,7 @@
   function applyWatermarkToLightbox(src) {
     const myGen = ++lightboxGen;
     const lightboxImg = document.getElementById('lightboxImg');
+    lightboxImg.alt = urbanPhotos[currentIndex]?.alt || '';
     lightboxImg.src = src;
 
     const photo = new Image();
