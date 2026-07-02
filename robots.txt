@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tomasnegrini.github.io/tomacho-ph/sitemap.xml
