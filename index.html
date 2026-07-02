@@ -1048,9 +1048,15 @@
   let currentIndex = 0;
   let lightboxGen = 0;
 
+  const altBySrc = {};
+  document.querySelectorAll('.photo-item img').forEach(img => {
+    altBySrc[img.getAttribute('src')] = img.alt;
+  });
+
   function applyWatermarkToLightbox(src) {
     const myGen = ++lightboxGen;
     const lightboxImg = document.getElementById('lightboxImg');
+    lightboxImg.alt = altBySrc[src] || '';
     lightboxImg.src = src; // muestra la imagen inmediatamente (desde caché)
 
     const photo = new Image();
