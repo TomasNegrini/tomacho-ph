@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HER Fitz Roy — tomacho.ph</title>
+  <meta name="description" content="Documentación fotográfica de HER Fitz Roy, en Buenos Aires — hotel y departamentos serviciados, obra terminada. Por Tomás Negrini (@tomacho.ph).">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HER Fitz Roy — tomacho.ph">
+  <meta property="og:description" content="Documentación fotográfica de HER Fitz Roy, Buenos Aires — hotel y departamentos serviciados, obra terminada.">
+  <meta property="og:image" content="https://tomasnegrini.github.io/tomacho-ph/proyectos/her-fitzroy/imgs/fitz-01.jpg">
+  <meta property="og:url" content="https://tomasnegrini.github.io/tomacho-ph/proyectos/her-fitzroy/index.html">
+  <meta property="og:locale" content="es_AR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HER Fitz Roy — tomacho.ph">
+  <meta name="twitter:description" content="Documentación fotográfica de HER Fitz Roy, Buenos Aires — hotel y departamentos serviciados, obra terminada.">
+  <meta name="twitter:image" content="https://tomasnegrini.github.io/tomacho-ph/proyectos/her-fitzroy/imgs/fitz-01.jpg">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LZ987XWLFT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LZ987XWLFT');
+  </script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5' stroke='%23c8a97e' stroke-width='1.5' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='14' cy='14' r='4.5' stroke='%23c8a97e' stroke-width='1' fill='none'/%3E%3Ccircle cx='14' cy='14' r='1.5' fill='%23c8a97e'/%3E%3C/svg%3E">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0c0c0c;
+      --surface: #141414;
+      --border: #222;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #c8a97e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(12,12,12,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { text-decoration: none; color: var(--text); }
+    .back-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── HEADER ── */
+    .proj-header { padding: 96px 48px 48px; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .proj-header h1 { font-size: 40px; font-weight: 400; margin-bottom: 8px; }
+    .proj-header h1 strong { font-weight: 600; color: var(--accent); }
+    .proj-header .proj-dates { color: var(--muted); font-size: 13px; letter-spacing: 1px; margin-bottom: 16px; display: block; }
+    .proj-header p { color: var(--muted); max-width: 560px; }
+
+    /* ── GALERÍA (mismo patrón que la home) ── */
+    .proj-gallery { max-width: 1200px; margin: 0 auto; padding: 0 48px 120px; }
+
+    .grid-featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 360px 240px;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .grid-featured .main { grid-row: 1 / 3; }
+
+    .grid-thirds {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .grid-thirds .photo-item { height: 260px; }
+
+    .photo-item {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: var(--surface);
+    }
+    .photo-item::before {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 72px;
+      height: 16px;
+      background-image: url('../../logos/logo-blanco.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 2;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+    }
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease, filter 0.3s ease;
+      filter: grayscale(10%);
+    }
+    .photo-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 28px;
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: var(--text); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 36px;
+      cursor: pointer;
+      padding: 16px;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .lightbox-nav:hover { color: #fff; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    footer a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .proj-header { padding: 72px 24px 32px; }
+      .proj-header h1 { font-size: 30px; }
+      .proj-gallery { padding: 0 24px 80px; }
+      .grid-featured { grid-template-columns: 1fr; grid-template-rows: none; }
+      .grid-featured .main { grid-row: auto; height: 280px; }
+      .grid-featured .photo-item { height: 220px; }
+      .grid-thirds { grid-template-columns: 1fr; }
+      .grid-thirds .photo-item { height: 220px; }
+      .lightbox-nav { font-size: 28px; padding: 12px; }
+      .lightbox-prev { left: 4px; }
+      .lightbox-next { right: 4px; }
+      footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo" style="display:flex;align-items:center;gap:10px;">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5" stroke="#c8a97e" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+      <circle cx="14" cy="14" r="4.5" stroke="#c8a97e" stroke-width="1" fill="none"/>
+      <circle cx="14" cy="14" r="1.5" fill="#c8a97e"/>
+    </svg>
+    <span style="font-size:13px;font-weight:600;letter-spacing:1.5px;">tomacho<span style="color:#c8a97e;">.</span>ph</span>
+  </a>
+  <a href="../../index.html#portfolio" class="back-link">‹ Volver al portfolio</a>
+</nav>
+
+<div class="proj-header">
+  <p class="section-eyebrow">Obra terminada</p>
+  <h1>HER <strong>Fitz Roy</strong></h1>
+  <span class="proj-dates">2025 — 2026</span>
+  <p>Documentación fotográfica de HER Fitz Roy, en Buenos Aires — hotel y departamentos serviciados, obra terminada.</p>
+</div>
+
+<div class="proj-gallery">
+  <div class="grid-featured">
+    <div class="photo-item main" onclick="openLightbox(0)">
+      <img src="imgs/fitz-01-thumb.webp" alt="HER Fitz Roy interior" loading="lazy">
+    </div>
+    <div class="photo-item" onclick="openLightbox(1)">
+      <img src="imgs/fitz-02-thumb.webp" alt="HER Fitz Roy fachada" loading="lazy">
+    </div>
+    <div class="photo-item" onclick="openLightbox(2)">
+      <img src="imgs/fitz-03-thumb.webp" alt="HER Fitz Roy restaurante" loading="lazy">
+    </div>
+  </div>
+  <div class="grid-thirds">
+    <div class="photo-item" onclick="openLightbox(3)"><img src="imgs/fitz-04-thumb.webp" alt="HER Fitz Roy fachada árbol" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(4)"><img src="imgs/fitz-05-thumb.webp" alt="HER Fitz Roy cartel" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(5)"><img src="imgs/fitz-06-thumb.webp" alt="HER Fitz Roy entrada" loading="lazy"></div>
+  </div>
+  <div class="grid-thirds">
+    <div class="photo-item" onclick="openLightbox(6)"><img src="imgs/fitz-07-thumb.webp" alt="HER Fitz Roy habitación vista ciudad" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(7)"><img src="imgs/fitz-08-thumb.webp" alt="HER Fitz Roy estudio" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(8)"><img src="imgs/fitz-09-thumb.webp" alt="HER Fitz Roy balcón" loading="lazy"></div>
+  </div>
+  <div class="grid-thirds">
+    <div class="photo-item" onclick="openLightbox(9)"><img src="imgs/fitz-10-thumb.webp" alt="HER Fitz Roy escalera mural" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(10)"><img src="imgs/fitz-11-thumb.webp" alt="HER Fitz Roy pantalla decorativa" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(11)"><img src="imgs/fitz-12-thumb.webp" alt="HER Fitz Roy detalle panel" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)">‹</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)">›</button>
+</div>
+
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5" stroke="#c8a97e" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+      <circle cx="14" cy="14" r="4.5" stroke="#c8a97e" stroke-width="1" fill="none"/>
+      <circle cx="14" cy="14" r="1.5" fill="#c8a97e"/>
+    </svg>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:1px;color:#f0f0f0;">tomacho<span style="color:#c8a97e;">.</span>ph</div>
+      <div style="font-size:11px;color:#555;margin-top:2px;">HER Fitz Roy</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:20px;">
+    <a href="../../privacidad/index.html">Política de Privacidad</a>
+    <a href="https://www.instagram.com/tomacho.ph/" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  const galleryPhotos = [
+    { file: 'fitz-01', alt: 'HER Fitz Roy interior' },
+    { file: 'fitz-02', alt: 'HER Fitz Roy fachada' },
+    { file: 'fitz-03', alt: 'HER Fitz Roy restaurante' },
+    { file: 'fitz-04', alt: 'HER Fitz Roy fachada árbol' },
+    { file: 'fitz-05', alt: 'HER Fitz Roy cartel' },
+    { file: 'fitz-06', alt: 'HER Fitz Roy entrada' },
+    { file: 'fitz-07', alt: 'HER Fitz Roy habitación vista ciudad' },
+    { file: 'fitz-08', alt: 'HER Fitz Roy estudio' },
+    { file: 'fitz-09', alt: 'HER Fitz Roy balcón' },
+    { file: 'fitz-10', alt: 'HER Fitz Roy escalera mural' },
+    { file: 'fitz-11', alt: 'HER Fitz Roy pantalla decorativa' },
+    { file: 'fitz-12', alt: 'HER Fitz Roy detalle panel' },
+  ];
+
+  let currentIndex = 0;
+  let lightboxGen = 0;
+
+  function applyWatermarkToLightbox(src) {
+    const myGen = ++lightboxGen;
+    const lightboxImg = document.getElementById('lightboxImg');
+    lightboxImg.alt = galleryPhotos[currentIndex]?.alt || '';
+    lightboxImg.src = src;
+
+    const photo = new Image();
+    photo.onload = function() {
+      if (lightboxGen !== myGen) return;
+      const W = photo.naturalWidth;
+      const H = photo.naturalHeight;
+      const isPortrait = H > W;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(photo, 0, 0);
+
+      const logo = new Image();
+      logo.onload = function() {
+        if (lightboxGen !== myGen) return;
+        const pct = isPortrait ? 0.20 : 0.08;
+        const logoW = Math.round(W * pct);
+        const logoH = Math.round(logoW * 40 / 180);
+        const pad = Math.round(Math.min(W, H) * 0.025);
+
+        ctx.globalAlpha = 0.35;
+        ctx.drawImage(logo, pad, H - logoH - pad, logoW, logoH);
+        try { lightboxImg.src = canvas.toDataURL('image/jpeg', 0.92); } catch(e) {}
+      };
+      logo.src = '../../logos/logo-blanco.svg';
+    };
+    photo.src = src;
+  }
+
+  function openLightbox(idx) {
+    currentIndex = idx;
+    applyWatermarkToLightbox(`imgs/${galleryPhotos[idx].file}.webp`);
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lightboxStep(dir) {
+    currentIndex = (currentIndex + dir + galleryPhotos.length) % galleryPhotos.length;
+    applyWatermarkToLightbox(`imgs/${galleryPhotos[currentIndex].file}.webp`);
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'ArrowRight') lightboxStep(1);
+    if (e.key === 'ArrowLeft') lightboxStep(-1);
+  });
+</script>
+</body>
+</html>

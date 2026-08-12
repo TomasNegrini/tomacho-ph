@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HER Aráoz — Avance de obra — tomacho.ph</title>
+  <meta name="description" content="Documentación fotográfica del avance de obra de HER Aráoz, Buenos Aires — desde los cimientos en octubre 2024 hasta hoy, por Tomás Negrini (@tomacho.ph).">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HER Aráoz — Avance de obra — tomacho.ph">
+  <meta property="og:description" content="Documentación fotográfica del avance de obra de HER Aráoz, Buenos Aires — desde los cimientos en octubre 2024 hasta hoy.">
+  <meta property="og:image" content="https://tomasnegrini.github.io/tomacho-ph/proyectos/her-araoz/imgs/araoz-01.jpg">
+  <meta property="og:url" content="https://tomasnegrini.github.io/tomacho-ph/proyectos/her-araoz/index.html">
+  <meta property="og:locale" content="es_AR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HER Aráoz — Avance de obra — tomacho.ph">
+  <meta name="twitter:description" content="Documentación fotográfica del avance de obra de HER Aráoz, Buenos Aires — desde los cimientos en octubre 2024 hasta hoy.">
+  <meta name="twitter:image" content="https://tomasnegrini.github.io/tomacho-ph/proyectos/her-araoz/imgs/araoz-01.jpg">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LZ987XWLFT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LZ987XWLFT');
+  </script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5' stroke='%23c8a97e' stroke-width='1.5' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='14' cy='14' r='4.5' stroke='%23c8a97e' stroke-width='1' fill='none'/%3E%3Ccircle cx='14' cy='14' r='1.5' fill='%23c8a97e'/%3E%3C/svg%3E">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0c0c0c;
+      --surface: #141414;
+      --border: #222;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #c8a97e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(12,12,12,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { text-decoration: none; color: var(--text); }
+    .back-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── HEADER ── */
+    .proj-header { padding: 96px 48px 48px; max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .proj-header h1 { font-size: 40px; font-weight: 400; margin-bottom: 8px; }
+    .proj-header h1 strong { font-weight: 600; color: var(--accent); }
+    .proj-header .proj-dates { color: var(--muted); font-size: 13px; letter-spacing: 1px; margin-bottom: 16px; display: block; }
+    .proj-header p { color: var(--muted); max-width: 560px; }
+
+    /* ── GALERÍA (mismo patrón que la home) ── */
+    .proj-gallery { max-width: 1200px; margin: 0 auto; padding: 0 48px 96px; }
+    .gallery-label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+
+    .grid-featured {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 360px 240px;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .grid-featured .main { grid-row: 1 / 3; }
+
+    .grid-thirds {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .grid-thirds .photo-item { height: 260px; }
+
+    .photo-item {
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      background: var(--surface);
+    }
+    .photo-item::before {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 72px;
+      height: 16px;
+      background-image: url('../../logos/logo-blanco.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 2;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+    }
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease, filter 0.3s ease;
+      filter: grayscale(10%);
+    }
+    .photo-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
+
+    /* ── EVOLUCIÓN DE LA OBRA (timeline vertical) ── */
+    .proj-evolucion { max-width: 1200px; margin: 0 auto; padding: 0 48px 120px; }
+    .evo-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
+    .evo-intro h2 { font-size: 28px; font-weight: 400; }
+    .evo-intro h2 strong { font-weight: 600; color: var(--accent); }
+    .evo-intro p { color: var(--muted); font-size: 13px; max-width: 340px; }
+
+    .timeline-month { margin-bottom: 48px; }
+    .timeline-month-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .timeline-month-label h4 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .timeline-month-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .timeline-photos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 4px;
+    }
+    .timeline-photos .photo-item { height: 320px; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 28px;
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: var(--text); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 36px;
+      cursor: pointer;
+      padding: 16px;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .lightbox-nav:hover { color: #fff; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    footer a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .proj-header { padding: 72px 24px 32px; }
+      .proj-header h1 { font-size: 30px; }
+      .proj-gallery { padding: 0 24px 64px; }
+      .proj-evolucion { padding: 0 24px 80px; }
+      .grid-featured { grid-template-columns: 1fr; grid-template-rows: none; }
+      .grid-featured .main { grid-row: auto; height: 280px; }
+      .grid-featured .photo-item { height: 220px; }
+      .grid-thirds { grid-template-columns: 1fr; }
+      .grid-thirds .photo-item { height: 220px; }
+      .timeline-photos { grid-template-columns: 1fr 1fr; }
+      .timeline-photos .photo-item { height: 200px; }
+      .evo-intro { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .lightbox-nav { font-size: 28px; padding: 12px; }
+      .lightbox-prev { left: 4px; }
+      .lightbox-next { right: 4px; }
+      footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .timeline-photos { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo" style="display:flex;align-items:center;gap:10px;">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5" stroke="#c8a97e" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+      <circle cx="14" cy="14" r="4.5" stroke="#c8a97e" stroke-width="1" fill="none"/>
+      <circle cx="14" cy="14" r="1.5" fill="#c8a97e"/>
+    </svg>
+    <span style="font-size:13px;font-weight:600;letter-spacing:1.5px;">tomacho<span style="color:#c8a97e;">.</span>ph</span>
+  </a>
+  <a href="../../index.html#portfolio" class="back-link">‹ Volver al portfolio</a>
+</nav>
+
+<div class="proj-header">
+  <p class="section-eyebrow">Avance de obra</p>
+  <h1>HER <strong>Aráoz</strong></h1>
+  <span class="proj-dates">2025 — 2026</span>
+  <p>Documentación fotográfica del edificio HER Aráoz, en Buenos Aires. Debajo, la galería actual y el registro mensual de la obra desde los cimientos.</p>
+</div>
+
+<div class="proj-gallery">
+  <p class="gallery-label">Enero 2026</p>
+  <div class="grid-featured">
+    <div class="photo-item main" onclick="openLightbox(0)">
+      <img src="imgs/araoz-01-thumb.webp" alt="HER Aráoz fachada" loading="lazy">
+    </div>
+    <div class="photo-item" onclick="openLightbox(1)">
+      <img src="imgs/araoz-02-thumb.webp" alt="HER Aráoz terraza panorama" loading="lazy">
+    </div>
+    <div class="photo-item" onclick="openLightbox(2)">
+      <img src="imgs/araoz-03-thumb.webp" alt="HER Aráoz contrapicado" loading="lazy">
+    </div>
+  </div>
+  <div class="grid-thirds">
+    <div class="photo-item" onclick="openLightbox(3)"><img src="imgs/araoz-04-thumb.webp" alt="HER Aráoz fachada árboles" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(4)"><img src="imgs/araoz-05-thumb.webp" alt="HER Aráoz fachada urbana" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(5)"><img src="imgs/araoz-06-thumb.webp" alt="HER Aráoz interior ventana" loading="lazy"></div>
+  </div>
+  <div class="grid-thirds">
+    <div class="photo-item" onclick="openLightbox(6)"><img src="imgs/araoz-07-thumb.webp" alt="HER Aráoz tabiques" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(7)"><img src="imgs/araoz-08-thumb.webp" alt="HER Aráoz operario en obra" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(8)"><img src="imgs/araoz-09-thumb.webp" alt="HER Aráoz interior luz natural" loading="lazy"></div>
+  </div>
+  <div class="grid-thirds">
+    <div class="photo-item" onclick="openLightbox(9)"><img src="imgs/araoz-10-thumb.webp" alt="HER Aráoz losa panorama" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(10)"><img src="imgs/araoz-11-thumb.webp" alt="HER Aráoz detalle fachada" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(11)"><img src="imgs/araoz-12-thumb.webp" alt="HER Aráoz fachada desde abajo" loading="lazy"></div>
+  </div>
+</div>
+
+<div class="proj-evolucion">
+  <div class="evo-intro">
+    <div>
+      <p class="section-eyebrow">Documentación mensual</p>
+      <h2>Evolución de <strong>la obra</strong></h2>
+    </div>
+    <p>Registro fotográfico mes a mes, de lo más reciente hacia enero de 2025.</p>
+  </div>
+  <div id="timelineContainer"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)">‹</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)">›</button>
+</div>
+
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="14,2 23.5,7.5 23.5,20.5 14,26 4.5,20.5 4.5,7.5" stroke="#c8a97e" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+      <circle cx="14" cy="14" r="4.5" stroke="#c8a97e" stroke-width="1" fill="none"/>
+      <circle cx="14" cy="14" r="1.5" fill="#c8a97e"/>
+    </svg>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:1px;color:#f0f0f0;">tomacho<span style="color:#c8a97e;">.</span>ph</div>
+      <div style="font-size:11px;color:#555;margin-top:2px;">HER Aráoz</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:20px;">
+    <a href="../../privacidad/index.html">Política de Privacidad</a>
+    <a href="https://www.instagram.com/tomacho.ph/" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  // ── Galería principal (Enero 2026) ──
+  const galleryPhotos = [
+    { file: 'araoz-01', alt: 'HER Aráoz fachada' },
+    { file: 'araoz-02', alt: 'HER Aráoz terraza panorama' },
+    { file: 'araoz-03', alt: 'HER Aráoz contrapicado' },
+    { file: 'araoz-04', alt: 'HER Aráoz fachada árboles' },
+    { file: 'araoz-05', alt: 'HER Aráoz fachada urbana' },
+    { file: 'araoz-06', alt: 'HER Aráoz interior ventana' },
+    { file: 'araoz-07', alt: 'HER Aráoz tabiques' },
+    { file: 'araoz-08', alt: 'HER Aráoz operario en obra' },
+    { file: 'araoz-09', alt: 'HER Aráoz interior luz natural' },
+    { file: 'araoz-10', alt: 'HER Aráoz losa panorama' },
+    { file: 'araoz-11', alt: 'HER Aráoz detalle fachada' },
+    { file: 'araoz-12', alt: 'HER Aráoz fachada desde abajo' },
+  ];
+
+  // ── Evolución mes a mes ──
+  // Para sumar un mes nuevo: agregar un bloque acá con sus fotos (ya optimizadas a webp thumb+full).
+  const months = [
+    { label: 'Noviembre 2025', photos: [
+      { file: 'araoz-evo-2025-11-01', alt: 'Silueta de operario caminando por un pasillo hacia el balcón' },
+      { file: 'araoz-evo-2025-11-02', alt: 'Operario soldando con chispas saltando' },
+    ]},
+    { label: 'Octubre 2025', photos: [
+      { file: 'araoz-evo-2025-10-01', alt: 'Detalle de canilla de jardín con jazmines en flor' },
+      { file: 'araoz-evo-2025-10-02', alt: 'Viga de hormigón con plantas de terraza' },
+    ]},
+    { label: 'Septiembre 2025', photos: [
+      { file: 'araoz-evo-2025-09-01', alt: 'Caño de bajada rojo entre el follaje verde de los árboles' },
+      { file: 'araoz-evo-2025-09-02', alt: 'Operario caminando entre tabiques de ladrillo' },
+    ]},
+    { label: 'Agosto 2025', photos: [
+      { file: 'araoz-evo-2025-08-01', alt: 'Caño de bajada rojo contra la fachada en obra' },
+      { file: 'araoz-evo-2025-08-02', alt: 'Interior con paredes de ladrillo y herramientas de obra' },
+    ]},
+    { label: 'Julio 2025', photos: [
+      { file: 'araoz-evo-2025-07-01', alt: 'Fachada del edificio en obra vista desde la calle entre árboles de invierno' },
+      { file: 'araoz-evo-2025-07-02', alt: 'Detalle de revoque interior con cañerías' },
+    ]},
+    { label: 'Junio 2025', photos: [
+      { file: 'araoz-evo-2025-06-01', alt: 'Operarios trabajando sobre el encofrado de madera' },
+      { file: 'araoz-evo-2025-06-02', alt: 'Vista contrapicada del edificio en obra entre los árboles' },
+    ]},
+    { label: 'Mayo 2025', photos: [
+      { file: 'araoz-evo-2025-05-01', alt: 'Pasillo en obra con el logo HER reflejado en un charco' },
+      { file: 'araoz-evo-2025-05-02', alt: 'Operario barriendo la obra en un día soleado' },
+    ]},
+    { label: 'Abril 2025', photos: [
+      { file: 'araoz-evo-2025-04-01', alt: 'Losa de hormigón recién colada con los pisos superiores de fondo' },
+    ]},
+    { label: 'Marzo 2025', photos: [
+      { file: 'araoz-evo-2025-03-01', alt: 'Interior en obra con paredes de ladrillo visto' },
+    ]},
+    { label: 'Febrero 2025', photos: [
+      { file: 'araoz-evo-2025-02-01', alt: 'Columnas de hormigón en construcción con el skyline de Buenos Aires de fondo' },
+    ]},
+    { label: 'Enero 2025', photos: [
+      { file: 'araoz-evo-2025-01-01', alt: 'Operarios trabajando en altura entre los árboles de la vereda' },
+    ]},
+  ];
+  const evoPhotos = months.flatMap(m => m.photos);
+  const allPhotos = [...galleryPhotos, ...evoPhotos];
+
+  function renderTimeline() {
+    const container = document.getElementById('timelineContainer');
+    let idx = galleryPhotos.length;
+    container.innerHTML = months.map(month => {
+      const photosHtml = month.photos.map(p => {
+        const html = `<div class="photo-item" onclick="openLightbox(${idx})"><img src="imgs/${p.file}-thumb.webp" alt="${p.alt}" loading="lazy"></div>`;
+        idx++;
+        return html;
+      }).join('');
+      return `<div class="timeline-month">
+        <div class="timeline-month-label"><h4>${month.label}</h4></div>
+        <div class="timeline-photos">${photosHtml}</div>
+      </div>`;
+    }).join('');
+  }
+  renderTimeline();
+
+  // ── Lightbox con marca de agua (mismo criterio que el sitio principal) ──
+  let currentIndex = 0;
+  let lightboxGen = 0;
+
+  function applyWatermarkToLightbox(src) {
+    const myGen = ++lightboxGen;
+    const lightboxImg = document.getElementById('lightboxImg');
+    lightboxImg.alt = allPhotos[currentIndex]?.alt || '';
+    lightboxImg.src = src;
+
+    const photo = new Image();
+    photo.onload = function() {
+      if (lightboxGen !== myGen) return;
+      const W = photo.naturalWidth;
+      const H = photo.naturalHeight;
+      const isPortrait = H > W;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(photo, 0, 0);
+
+      const logo = new Image();
+      logo.onload = function() {
+        if (lightboxGen !== myGen) return;
+        const pct = isPortrait ? 0.20 : 0.08;
+        const logoW = Math.round(W * pct);
+        const logoH = Math.round(logoW * 40 / 180);
+        const pad = Math.round(Math.min(W, H) * 0.025);
+
+        ctx.globalAlpha = 0.35;
+        ctx.drawImage(logo, pad, H - logoH - pad, logoW, logoH);
+        try { lightboxImg.src = canvas.toDataURL('image/jpeg', 0.92); } catch(e) {}
+      };
+      logo.src = '../../logos/logo-blanco.svg';
+    };
+    photo.src = src;
+  }
+
+  function openLightbox(idx) {
+    currentIndex = idx;
+    applyWatermarkToLightbox(`imgs/${allPhotos[idx].file}.webp`);
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lightboxStep(dir) {
+    currentIndex = (currentIndex + dir + allPhotos.length) % allPhotos.length;
+    applyWatermarkToLightbox(`imgs/${allPhotos[currentIndex].file}.webp`);
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'ArrowRight') lightboxStep(1);
+    if (e.key === 'ArrowLeft') lightboxStep(-1);
+  });
+</script>
+</body>
+</html>
