@@ -279,29 +279,29 @@
 <div class="proj-gallery">
   <div class="grid-featured">
     <div class="photo-item main" onclick="openLightbox(0)">
-      <img src="imgs/salvador-01-thumb.webp" alt="HER El Salvador fachada" loading="lazy">
+      <img src="imgs/salvador-01-thumb.webp" srcset="imgs/salvador-01-sm.webp 640w, imgs/salvador-01-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador fachada" loading="lazy">
     </div>
     <div class="photo-item" onclick="openLightbox(1)">
-      <img src="imgs/salvador-02-thumb.webp" alt="HER El Salvador fachada contrapicado" loading="lazy">
+      <img src="imgs/salvador-02-thumb.webp" srcset="imgs/salvador-02-sm.webp 640w, imgs/salvador-02-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador fachada contrapicado" loading="lazy">
     </div>
     <div class="photo-item" onclick="openLightbox(2)">
-      <img src="imgs/salvador-03-thumb.webp" alt="HER El Salvador árbol vidrio" loading="lazy">
+      <img src="imgs/salvador-03-thumb.webp" srcset="imgs/salvador-03-sm.webp 640w, imgs/salvador-03-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador árbol vidrio" loading="lazy">
     </div>
   </div>
   <div class="grid-thirds">
-    <div class="photo-item" onclick="openLightbox(3)"><img src="imgs/salvador-04-thumb.webp" alt="HER El Salvador follaje" loading="lazy"></div>
-    <div class="photo-item" onclick="openLightbox(4)"><img src="imgs/salvador-05-thumb.webp" alt="HER El Salvador fachada abstracta" loading="lazy"></div>
-    <div class="photo-item" onclick="openLightbox(5)"><img src="imgs/salvador-06-thumb.webp" alt="HER El Salvador balcón plantas" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(3)"><img src="imgs/salvador-04-thumb.webp" srcset="imgs/salvador-04-sm.webp 640w, imgs/salvador-04-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador follaje" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(4)"><img src="imgs/salvador-05-thumb.webp" srcset="imgs/salvador-05-sm.webp 640w, imgs/salvador-05-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador fachada abstracta" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(5)"><img src="imgs/salvador-06-thumb.webp" srcset="imgs/salvador-06-sm.webp 640w, imgs/salvador-06-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador balcón plantas" loading="lazy"></div>
   </div>
   <div class="grid-thirds">
-    <div class="photo-item" onclick="openLightbox(6)"><img src="imgs/salvador-07-thumb.webp" alt="HER El Salvador piscina panorama" loading="lazy"></div>
-    <div class="photo-item" onclick="openLightbox(7)"><img src="imgs/salvador-08-thumb.webp" alt="HER El Salvador jardín balcón" loading="lazy"></div>
-    <div class="photo-item" onclick="openLightbox(8)"><img src="imgs/salvador-09-thumb.webp" alt="HER El Salvador interior carpintería" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(6)"><img src="imgs/salvador-07-thumb.webp" srcset="imgs/salvador-07-sm.webp 640w, imgs/salvador-07-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador piscina panorama" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(7)"><img src="imgs/salvador-08-thumb.webp" srcset="imgs/salvador-08-sm.webp 640w, imgs/salvador-08-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador jardín balcón" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(8)"><img src="imgs/salvador-09-thumb.webp" srcset="imgs/salvador-09-sm.webp 640w, imgs/salvador-09-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador interior carpintería" loading="lazy"></div>
   </div>
   <div class="grid-thirds">
-    <div class="photo-item" onclick="openLightbox(9)"><img src="imgs/salvador-10-thumb.webp" alt="HER El Salvador piscina azulejos" loading="lazy"></div>
-    <div class="photo-item" onclick="openLightbox(10)"><img src="imgs/salvador-11-thumb.webp" alt="HER El Salvador piscina interior" loading="lazy"></div>
-    <div class="photo-item" onclick="openLightbox(11)"><img src="imgs/salvador-12-thumb.webp" alt="HER El Salvador terraza" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(9)"><img src="imgs/salvador-10-thumb.webp" srcset="imgs/salvador-10-sm.webp 640w, imgs/salvador-10-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador piscina azulejos" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(10)"><img src="imgs/salvador-11-thumb.webp" srcset="imgs/salvador-11-sm.webp 640w, imgs/salvador-11-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador piscina interior" loading="lazy"></div>
+    <div class="photo-item" onclick="openLightbox(11)"><img src="imgs/salvador-12-thumb.webp" srcset="imgs/salvador-12-sm.webp 640w, imgs/salvador-12-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="HER El Salvador terraza" loading="lazy"></div>
   </div>
 </div>
 
@@ -408,7 +408,7 @@
     let idx = galleryPhotos.length;
     container.innerHTML = months.map(month => {
       const photosHtml = month.photos.map(p => {
-        const html = `<div class="photo-item" onclick="openLightbox(${idx})"><img src="imgs/${p.file}-thumb.webp" alt="${p.alt}" loading="lazy"></div>`;
+        const html = `<div class="photo-item" onclick="openLightbox(${idx})"><img src="imgs/${p.file}-thumb.webp" srcset="imgs/${p.file}-sm.webp 640w, imgs/${p.file}-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="${p.alt}" loading="lazy"></div>`;
         idx++;
         return html;
       }).join('');
