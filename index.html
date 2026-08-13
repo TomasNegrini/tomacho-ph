@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>tomacho.ph — Fotografía Arquitectónica</title>
   <meta name="description" content="Fotografía y filmación arquitectónica en Buenos Aires — avance de obra, tomas con dron y portfolio de Tomás Negrini (@tomacho.ph).">
+  <link rel="canonical" href="https://tomasnegrini.github.io/tomacho-ph/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -988,10 +989,10 @@
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)">&#8249;</button>
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)" aria-label="Foto anterior">&#8249;</button>
   <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()">
-  <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)">&#8250;</button>
+  <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)" aria-label="Foto siguiente">&#8250;</button>
 </div>
 
 <script>

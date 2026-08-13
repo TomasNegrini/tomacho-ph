@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Next Pampa 2.0 — tomacho.ph</title>
   <meta name="description" content="Documentación fotográfica del avance de obra de Next Pampa 2.0, en Buenos Aires. Por Tomás Negrini (@tomacho.ph).">
+  <link rel="canonical" href="https://tomasnegrini.github.io/tomacho-ph/proyectos/next-pampa/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -333,10 +334,10 @@
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)">‹</button>
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxStep(-1)" aria-label="Foto anterior">‹</button>
   <img id="lightboxImg" src="" alt="">
-  <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)">›</button>
+  <button class="lightbox-nav lightbox-next" onclick="lightboxStep(1)" aria-label="Foto siguiente">›</button>
 </div>
 
 <footer>
