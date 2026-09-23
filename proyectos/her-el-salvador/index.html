@@ -332,6 +332,17 @@
   <div id="timelineContainer"></div>
 </div>
 
+<div class="proj-evolucion">
+  <div class="evo-intro">
+    <div>
+      <p class="section-eyebrow">Detrás de cámara</p>
+      <h2>Evento con <strong>clientes</strong></h2>
+    </div>
+    <p>Desayunos organizados por MCL Studio para mostrar las unidades terminadas a clientes, en una de las unidades amobladas de HER El Salvador.</p>
+  </div>
+  <div id="eventoContainer"></div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
@@ -374,67 +385,55 @@
     { file: 'salvador-12', alt: 'HER El Salvador terraza' },
   ];
 
-  // ── Evolución mes a mes ──
-  const months = [
-    { label: 'Noviembre 2025', photos: [
-      { file: 'salvador-evo-2025-11-01', alt: 'Operario instalando puertas de placard en cocina' },
-      { file: 'salvador-evo-2025-11-02', alt: 'Balcón con equipos de aire acondicionado y vista a la ciudad' },
-    ]},
-    { label: 'Octubre 2025', photos: [
-      { file: 'salvador-evo-2025-10-01', alt: 'Interior con muebles de cocina y materiales de piso' },
-      { file: 'salvador-evo-2025-10-02', alt: 'Detalle de ventana con vista a los árboles' },
-    ]},
-    { label: 'Septiembre 2025', photos: [
-      { file: 'salvador-evo-2025-09-01', alt: 'Fachada de vidrio terminada vista desde la calle' },
-      { file: 'salvador-evo-2025-09-02', alt: 'Detalle de placard y revestimiento interior en instalación' },
-    ]},
-    { label: 'Agosto 2025', photos: [
-      { file: 'salvador-evo-2025-08-01', alt: 'Balcón terminado con vista a la ciudad' },
-      { file: 'salvador-evo-2025-08-02', alt: 'Interior en obra con mobiliario de cocina y baño en instalación' },
-    ]},
-    { label: 'Julio 2025', photos: [
-      { file: 'salvador-evo-2025-07-01', alt: 'Fachada del edificio en obra vista desde la calle entre árboles' },
-      { file: 'salvador-evo-2025-07-02', alt: 'Detalle de baranda perforada de balcón con vista a la ciudad' },
-    ]},
-    { label: 'Junio 2025', photos: [
-      { file: 'salvador-evo-2025-06-01', alt: 'Vista contrapicada del edificio en obra entre ramas de árbol' },
-    ]},
-    { label: 'Mayo 2025', photos: [
-      { file: 'salvador-evo-2025-05-01', alt: 'Vista contrapicada de los balcones en obra' },
-      { file: 'salvador-evo-2025-05-02', alt: 'Pasillo interior con puertas terminadas numeradas' },
-    ]},
-    { label: 'Abril 2025', photos: [
-      { file: 'salvador-evo-2025-04-01', alt: 'Terraza en obra con estructura de ladrillo y cielo nublado' },
-    ]},
-    { label: 'Marzo 2025', photos: [
-      { file: 'salvador-evo-2025-03-01', alt: 'Interior de unidad terminada con cocina de madera' },
-    ]},
-    { label: 'Febrero 2025', photos: [
-      { file: 'salvador-evo-2025-02-01', alt: 'Detalle de revestimiento negro con instalación eléctrica a la vista' },
-    ]},
-    { label: 'Enero 2025', photos: [
-      { file: 'salvador-evo-2025-01-01', alt: 'Vista de la terraza en obra con el cielo despejado' },
-    ]},
+  // ── Evolución de la obra (orden cronológico, de más reciente a enero 2025) ──
+  const evoPhotos = [
+    { file: 'salvador-evo-2025-11-01', alt: 'Operario instalando puertas de placard en cocina' },
+    { file: 'salvador-evo-2025-11-02', alt: 'Balcón con equipos de aire acondicionado y vista a la ciudad' },
+    { file: 'salvador-evo-2025-10-01', alt: 'Interior con muebles de cocina y materiales de piso' },
+    { file: 'salvador-evo-2025-10-02', alt: 'Detalle de ventana con vista a los árboles' },
+    { file: 'salvador-evo-2025-09-01', alt: 'Fachada de vidrio terminada vista desde la calle' },
+    { file: 'salvador-evo-2025-09-02', alt: 'Detalle de placard y revestimiento interior en instalación' },
+    { file: 'salvador-evo-2025-08-01', alt: 'Balcón terminado con vista a la ciudad' },
+    { file: 'salvador-evo-2025-08-02', alt: 'Interior en obra con mobiliario de cocina y baño en instalación' },
+    { file: 'salvador-evo-2025-07-01', alt: 'Fachada del edificio en obra vista desde la calle entre árboles' },
+    { file: 'salvador-evo-2025-07-02', alt: 'Detalle de baranda perforada de balcón con vista a la ciudad' },
+    { file: 'salvador-evo-2025-06-01', alt: 'Vista contrapicada del edificio en obra entre ramas de árbol' },
+    { file: 'salvador-evo-2025-05-01', alt: 'Vista contrapicada de los balcones en obra' },
+    { file: 'salvador-evo-2025-05-02', alt: 'Pasillo interior con puertas terminadas numeradas' },
+    { file: 'salvador-evo-2025-04-01', alt: 'Terraza en obra con estructura de ladrillo y cielo nublado' },
+    { file: 'salvador-evo-2025-03-01', alt: 'Interior de unidad terminada con cocina de madera' },
+    { file: 'salvador-evo-2025-02-01', alt: 'Detalle de revestimiento negro con instalación eléctrica a la vista' },
+    { file: 'salvador-evo-2025-01-01', alt: 'Vista de la terraza en obra con el cielo despejado' },
   ];
-  const evoPhotos = months.flatMap(m => m.photos);
-  const allPhotos = [...galleryPhotos, ...evoPhotos];
 
-  function renderTimeline() {
-    const container = document.getElementById('timelineContainer');
-    let idx = galleryPhotos.length;
-    container.innerHTML = months.map(month => {
-      const photosHtml = month.photos.map(p => {
-        const html = `<div class="photo-item" onclick="openLightbox(${idx})"><img src="imgs/${p.file}-thumb.webp" srcset="imgs/${p.file}-sm.webp 640w, imgs/${p.file}-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="${p.alt}" loading="lazy"></div>`;
-        idx++;
-        return html;
-      }).join('');
-      return `<div class="timeline-month">
-        <div class="timeline-month-label"><h4>${month.label}</h4></div>
-        <div class="timeline-photos">${photosHtml}</div>
-      </div>`;
-    }).join('');
+  // ── Evento con clientes (desayunos MCL Studio) ──
+  const eventoPhotos = [
+    { file: 'evento-2025-11-01', alt: 'Maqueta arquitectónica del edificio HER El Salvador sobre la mesa del evento' },
+    { file: 'evento-2025-11-02', alt: 'Reflejo en espejo circular de invitados conversando en el balcón' },
+    { file: 'evento-2025-11-03', alt: 'Mesada de café estilizada con flores y pantalla mostrando la fachada del edificio' },
+    { file: 'evento-2025-11-04', alt: 'Invitados conversando en el balcón, entre cortinas y vegetación' },
+    { file: 'evento-2025-11-05', alt: 'Invitados conversando en la cocina, con casco de obra sobre la silla' },
+    { file: 'evento-2025-11-06', alt: 'Invitada junto a la ventana, reflejo en espejo de la habitación' },
+    { file: 'evento-2025-11-07', alt: 'Detalle de preparación de café espumado sobre la mesada' },
+    { file: 'evento-2025-10-01', alt: 'Macarons personalizados con el logo de MCL sobre la mesada' },
+    { file: 'evento-2025-10-02', alt: 'Clientes conversando junto a la ventana durante el desayuno' },
+    { file: 'evento-2025-10-03', alt: 'Detalle de macaron personalizado con el logo MCL' },
+    { file: 'evento-2025-10-04', alt: 'Vista general del living de la unidad amoblada durante el evento' },
+    { file: 'evento-2025-10-05', alt: 'Rincón de café y desayuno en la unidad amoblada' },
+    { file: 'evento-2025-10-06', alt: 'Detalle de la mesa de desayuno con flores y toallas' },
+    { file: 'evento-2025-10-07', alt: 'Flores junto a fotografía enmarcada del edificio' },
+  ];
+
+  const allPhotos = [...galleryPhotos, ...evoPhotos, ...eventoPhotos];
+
+  function renderPhotoGrid(containerId, photos, startIdx) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = `<div class="timeline-photos">${photos.map((p, i) =>
+      `<div class="photo-item" onclick="openLightbox(${startIdx + i})"><img src="imgs/${p.file}-thumb.webp" srcset="imgs/${p.file}-sm.webp 640w, imgs/${p.file}-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="${p.alt}" loading="lazy"></div>`
+    ).join('')}</div>`;
   }
-  renderTimeline();
+  renderPhotoGrid('timelineContainer', evoPhotos, galleryPhotos.length);
+  renderPhotoGrid('eventoContainer', eventoPhotos, galleryPhotos.length + evoPhotos.length);
 
   let currentIndex = 0;
   let lightboxGen = 0;
