@@ -657,6 +657,8 @@
       }
       .grid-featured .photo-item:last-child:hover::after { background: rgba(0,0,0,0.75); }
       .vc-stage { height: 420px; }
+      .dron-grid-2, .dron-grid-3 { grid-template-columns: 1fr 1fr !important; }
+      .dron-grid-2 .photo-item, .dron-grid-3 .photo-item { height: 200px !important; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 8px; }
       .portfolio-header p { text-align: left; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
@@ -926,14 +928,25 @@
   <div style="max-width:1200px; margin:0 auto;">
     <p class="section-eyebrow">Filmación con Dron</p>
     <h2>Vista <strong>aérea</strong></h2>
-    <p style="color:var(--muted); margin-bottom: 48px; max-width:480px;">Perspectivas únicas desde el aire — arquitectura, entorno y eventos deportivos.</p>
+    <p style="color:var(--muted); margin-bottom: 48px; max-width:480px;">Perspectivas únicas desde el aire — arquitectura, entorno y eventos.</p>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px; max-width:1000px; margin-bottom:48px;">
+    <div class="dron-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:4px; max-width:1000px; margin-bottom:4px;">
       <div class="photo-item" style="height:320px" onclick="openLightbox('imgs/rugby-01.webp',0,'rugby')">
         <img src="imgs/rugby-01-thumb.webp" srcset="imgs/rugby-01-sm.webp 640w, imgs/rugby-01-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="Fotografía aérea cenital scrum" loading="lazy">
       </div>
       <div class="photo-item" style="height:320px" onclick="openLightbox('imgs/rugby-02.webp',1,'rugby')">
         <img src="imgs/rugby-02-thumb.webp" srcset="imgs/rugby-02-sm.webp 640w, imgs/rugby-02-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="Fotografía aérea dusk rugby" loading="lazy">
+      </div>
+    </div>
+    <div class="dron-grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px; max-width:1000px; margin-bottom:48px;">
+      <div class="photo-item" style="height:220px" onclick="openLightbox('imgs/baios-01.webp',0,'baios')">
+        <img src="imgs/baios-01-thumb.webp" srcset="imgs/baios-01-sm.webp 640w, imgs/baios-01-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 460px" alt="Fotografía aérea cenital lanzamiento BAIOS, cancha y pileta iluminadas de noche" loading="lazy">
+      </div>
+      <div class="photo-item" style="height:220px" onclick="openLightbox('imgs/baios-02.webp',1,'baios')">
+        <img src="imgs/baios-02-thumb.webp" srcset="imgs/baios-02-sm.webp 640w, imgs/baios-02-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 460px" alt="Fotografía aérea cenital lanzamiento BAIOS, invitados en la cancha" loading="lazy">
+      </div>
+      <div class="photo-item" style="height:220px" onclick="openLightbox('imgs/baios-03.webp',2,'baios')">
+        <img src="imgs/baios-03-thumb.webp" srcset="imgs/baios-03-sm.webp 640w, imgs/baios-03-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 460px" alt="Fotografía aérea cenital lanzamiento BAIOS, luces cálidas al atardecer" loading="lazy">
       </div>
     </div>
 
@@ -1048,6 +1061,7 @@
   // Lightbox con navegación
   const galleries = {
     rugby:    ['imgs/rugby-01.webp', 'imgs/rugby-02.webp'],
+    baios:    ['imgs/baios-01.webp', 'imgs/baios-02.webp', 'imgs/baios-03.webp'],
   };
   let currentGallery = [];
   let currentIndex = 0;
@@ -1128,11 +1142,9 @@
 
   // Carrusel de videos dron
   const dronVideos = [
-    'imgs/rugby-vid-01.mp4',
     'imgs/rugby-vid-02.mp4',
-    'imgs/rugby-vid-03.mp4',
     'imgs/dron1.mp4',
-    'imgs/dron2.mp4',
+    'imgs/baios-vid.mp4',
   ];
   let vcIndex = 0;
   const vcVideoEl = document.getElementById('vcVideo');
