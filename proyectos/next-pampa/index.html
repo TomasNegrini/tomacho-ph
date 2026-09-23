@@ -374,66 +374,34 @@
     { file: 'pampa-12', alt: 'Next Pampa 2.0 borde balcón' },
   ];
 
-  // ── Evolución mes a mes ──
-  const months = [
-    { label: 'Noviembre 2025', photos: [
-      { file: 'pampa-evo-2025-11-01', alt: 'Detalle de encofrado en balcón contra el cielo despejado' },
-      { file: 'pampa-evo-2025-11-02', alt: 'Operario caminando por un pasillo interior en obra' },
-    ]},
-    { label: 'Octubre 2025', photos: [
-      { file: 'pampa-evo-2025-10-01', alt: 'Fachada del edificio con balcones y cartel Next Pampa 2.0' },
-      { file: 'pampa-evo-2025-10-02', alt: 'Operarios trabajando en el último piso en obra' },
-    ]},
-    { label: 'Septiembre 2025', photos: [
-      { file: 'pampa-evo-2025-09-01', alt: 'Vista de la fachada en obra desde la calle con árboles en flor' },
-      { file: 'pampa-evo-2025-09-02', alt: 'Interior en obra con agua acumulada en el piso' },
-    ]},
-    { label: 'Agosto 2025', photos: [
-      { file: 'pampa-evo-2025-08-01', alt: 'Fachada del edificio en obra con cartel Next Pampa 2.0' },
-      { file: 'pampa-evo-2025-08-02', alt: 'Terraza con armadura de hierro y operarios trabajando' },
-    ]},
-    { label: 'Julio 2025', photos: [
-      { file: 'pampa-evo-2025-07-01', alt: 'Vista contrapicada del edificio en obra entre árboles' },
-      { file: 'pampa-evo-2025-07-02', alt: 'Detalle de columnas y encofrado en la terraza' },
-    ]},
-    { label: 'Junio 2025', photos: [
-      { file: 'pampa-evo-2025-06-01', alt: 'Vista contrapicada del edificio con cartel Next Pampa 2.0' },
-      { file: 'pampa-evo-2025-06-02', alt: 'Vista contrapicada del edificio en obra entre ramas de árbol' },
-    ]},
-    { label: 'Mayo 2025', photos: [
-      { file: 'pampa-evo-2025-05-01', alt: 'Fachada del edificio en obra con cartel Next Pampa 2.0' },
-      { file: 'pampa-evo-2025-05-02', alt: 'Terraza con armadura de hierro y vista a edificios linderos' },
-    ]},
-    { label: 'Abril 2025', photos: [
-      { file: 'pampa-evo-2025-04-01', alt: 'Interior en obra con encofrado y vista a la calle' },
-    ]},
-    { label: 'Marzo 2025', photos: [
-      { file: 'pampa-evo-2025-03-01', alt: 'Losa de fundación con instalaciones eléctricas' },
-    ]},
-    { label: 'Febrero 2025', photos: [
-      { file: 'pampa-evo-2025-02-01', alt: 'Operarios reunidos junto al cartel MCL Studio' },
-    ]},
-    { label: 'Enero 2025', photos: [
-      { file: 'pampa-evo-2025-01-01', alt: 'Vista aérea de operarios colando hormigón' },
-    ]},
+  // ── Evolución de la obra (orden cronológico, de más reciente a enero 2025) ──
+  const evoPhotos = [
+    { file: 'pampa-evo-2025-11-01', alt: 'Detalle de encofrado en balcón contra el cielo despejado' },
+    { file: 'pampa-evo-2025-11-02', alt: 'Operario caminando por un pasillo interior en obra' },
+    { file: 'pampa-evo-2025-10-01', alt: 'Fachada del edificio con balcones y cartel Next Pampa 2.0' },
+    { file: 'pampa-evo-2025-10-02', alt: 'Operarios trabajando en el último piso en obra' },
+    { file: 'pampa-evo-2025-09-01', alt: 'Vista de la fachada en obra desde la calle con árboles en flor' },
+    { file: 'pampa-evo-2025-09-02', alt: 'Interior en obra con agua acumulada en el piso' },
+    { file: 'pampa-evo-2025-08-01', alt: 'Fachada del edificio en obra con cartel Next Pampa 2.0' },
+    { file: 'pampa-evo-2025-08-02', alt: 'Terraza con armadura de hierro y operarios trabajando' },
+    { file: 'pampa-evo-2025-07-01', alt: 'Vista contrapicada del edificio en obra entre árboles' },
+    { file: 'pampa-evo-2025-07-02', alt: 'Detalle de columnas y encofrado en la terraza' },
+    { file: 'pampa-evo-2025-06-01', alt: 'Vista contrapicada del edificio con cartel Next Pampa 2.0' },
+    { file: 'pampa-evo-2025-06-02', alt: 'Vista contrapicada del edificio en obra entre ramas de árbol' },
+    { file: 'pampa-evo-2025-05-01', alt: 'Fachada del edificio en obra con cartel Next Pampa 2.0' },
+    { file: 'pampa-evo-2025-05-02', alt: 'Terraza con armadura de hierro y vista a edificios linderos' },
+    { file: 'pampa-evo-2025-04-01', alt: 'Interior en obra con encofrado y vista a la calle' },
+    { file: 'pampa-evo-2025-03-01', alt: 'Losa de fundación con instalaciones eléctricas' },
+    { file: 'pampa-evo-2025-02-01', alt: 'Operarios reunidos junto al cartel MCL Studio' },
+    { file: 'pampa-evo-2025-01-01', alt: 'Vista aérea de operarios colando hormigón' },
   ];
-  const evoPhotos = months.flatMap(m => m.photos);
   const allPhotos = [...galleryPhotos, ...evoPhotos];
 
   function renderTimeline() {
     const container = document.getElementById('timelineContainer');
-    let idx = galleryPhotos.length;
-    container.innerHTML = months.map(month => {
-      const photosHtml = month.photos.map(p => {
-        const html = `<div class="photo-item" onclick="openLightbox(${idx})"><img src="imgs/${p.file}-thumb.webp" srcset="imgs/${p.file}-sm.webp 640w, imgs/${p.file}-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="${p.alt}" loading="lazy"></div>`;
-        idx++;
-        return html;
-      }).join('');
-      return `<div class="timeline-month">
-        <div class="timeline-month-label"><h4>${month.label}</h4></div>
-        <div class="timeline-photos">${photosHtml}</div>
-      </div>`;
-    }).join('');
+    container.innerHTML = `<div class="timeline-photos">${evoPhotos.map((p, i) =>
+      `<div class="photo-item" onclick="openLightbox(${galleryPhotos.length + i})"><img src="imgs/${p.file}-thumb.webp" srcset="imgs/${p.file}-sm.webp 640w, imgs/${p.file}-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="${p.alt}" loading="lazy"></div>`
+    ).join('')}</div>`;
   }
   renderTimeline();
 

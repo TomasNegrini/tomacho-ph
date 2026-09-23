@@ -377,67 +377,35 @@
     { file: 'araoz-12', alt: 'HER Aráoz fachada desde abajo' },
   ];
 
-  // ── Evolución mes a mes ──
-  // Para sumar un mes nuevo: agregar un bloque acá con sus fotos (ya optimizadas a webp thumb+full).
-  const months = [
-    { label: 'Noviembre 2025', photos: [
-      { file: 'araoz-evo-2025-11-01', alt: 'Silueta de operario caminando por un pasillo hacia el balcón' },
-      { file: 'araoz-evo-2025-11-02', alt: 'Operario soldando con chispas saltando' },
-    ]},
-    { label: 'Octubre 2025', photos: [
-      { file: 'araoz-evo-2025-10-01', alt: 'Detalle de canilla de jardín con jazmines en flor' },
-      { file: 'araoz-evo-2025-10-02', alt: 'Viga de hormigón con plantas de terraza' },
-    ]},
-    { label: 'Septiembre 2025', photos: [
-      { file: 'araoz-evo-2025-09-01', alt: 'Caño de bajada rojo entre el follaje verde de los árboles' },
-      { file: 'araoz-evo-2025-09-02', alt: 'Operario caminando entre tabiques de ladrillo' },
-    ]},
-    { label: 'Agosto 2025', photos: [
-      { file: 'araoz-evo-2025-08-01', alt: 'Caño de bajada rojo contra la fachada en obra' },
-      { file: 'araoz-evo-2025-08-02', alt: 'Interior con paredes de ladrillo y herramientas de obra' },
-    ]},
-    { label: 'Julio 2025', photos: [
-      { file: 'araoz-evo-2025-07-01', alt: 'Fachada del edificio en obra vista desde la calle entre árboles de invierno' },
-      { file: 'araoz-evo-2025-07-02', alt: 'Detalle de revoque interior con cañerías' },
-    ]},
-    { label: 'Junio 2025', photos: [
-      { file: 'araoz-evo-2025-06-01', alt: 'Operarios trabajando sobre el encofrado de madera' },
-      { file: 'araoz-evo-2025-06-02', alt: 'Vista contrapicada del edificio en obra entre los árboles' },
-    ]},
-    { label: 'Mayo 2025', photos: [
-      { file: 'araoz-evo-2025-05-01', alt: 'Pasillo en obra con el logo HER reflejado en un charco' },
-      { file: 'araoz-evo-2025-05-02', alt: 'Operario barriendo la obra en un día soleado' },
-    ]},
-    { label: 'Abril 2025', photos: [
-      { file: 'araoz-evo-2025-04-01', alt: 'Losa de hormigón recién colada con los pisos superiores de fondo' },
-    ]},
-    { label: 'Marzo 2025', photos: [
-      { file: 'araoz-evo-2025-03-01', alt: 'Interior en obra con paredes de ladrillo visto' },
-    ]},
-    { label: 'Febrero 2025', photos: [
-      { file: 'araoz-evo-2025-02-01', alt: 'Columnas de hormigón en construcción con el skyline de Buenos Aires de fondo' },
-    ]},
-    { label: 'Enero 2025', photos: [
-      { file: 'araoz-evo-2025-01-01', alt: 'Operarios trabajando en altura entre los árboles de la vereda' },
-    ]},
+  // ── Evolución de la obra (orden cronológico, de más reciente a enero 2025) ──
+  // Para sumar fotos nuevas: agregarlas acá arriba (ya optimizadas a webp thumb+full).
+  const evoPhotos = [
+    { file: 'araoz-evo-2025-11-01', alt: 'Silueta de operario caminando por un pasillo hacia el balcón' },
+    { file: 'araoz-evo-2025-11-02', alt: 'Operario soldando con chispas saltando' },
+    { file: 'araoz-evo-2025-10-01', alt: 'Detalle de canilla de jardín con jazmines en flor' },
+    { file: 'araoz-evo-2025-10-02', alt: 'Viga de hormigón con plantas de terraza' },
+    { file: 'araoz-evo-2025-09-01', alt: 'Caño de bajada rojo entre el follaje verde de los árboles' },
+    { file: 'araoz-evo-2025-09-02', alt: 'Operario caminando entre tabiques de ladrillo' },
+    { file: 'araoz-evo-2025-08-01', alt: 'Caño de bajada rojo contra la fachada en obra' },
+    { file: 'araoz-evo-2025-08-02', alt: 'Interior con paredes de ladrillo y herramientas de obra' },
+    { file: 'araoz-evo-2025-07-01', alt: 'Fachada del edificio en obra vista desde la calle entre árboles de invierno' },
+    { file: 'araoz-evo-2025-07-02', alt: 'Detalle de revoque interior con cañerías' },
+    { file: 'araoz-evo-2025-06-01', alt: 'Operarios trabajando sobre el encofrado de madera' },
+    { file: 'araoz-evo-2025-06-02', alt: 'Vista contrapicada del edificio en obra entre los árboles' },
+    { file: 'araoz-evo-2025-05-01', alt: 'Pasillo en obra con el logo HER reflejado en un charco' },
+    { file: 'araoz-evo-2025-05-02', alt: 'Operario barriendo la obra en un día soleado' },
+    { file: 'araoz-evo-2025-04-01', alt: 'Losa de hormigón recién colada con los pisos superiores de fondo' },
+    { file: 'araoz-evo-2025-03-01', alt: 'Interior en obra con paredes de ladrillo visto' },
+    { file: 'araoz-evo-2025-02-01', alt: 'Columnas de hormigón en construcción con el skyline de Buenos Aires de fondo' },
+    { file: 'araoz-evo-2025-01-01', alt: 'Operarios trabajando en altura entre los árboles de la vereda' },
   ];
-  const evoPhotos = months.flatMap(m => m.photos);
   const allPhotos = [...galleryPhotos, ...evoPhotos];
 
   function renderTimeline() {
     const container = document.getElementById('timelineContainer');
-    let idx = galleryPhotos.length;
-    container.innerHTML = months.map(month => {
-      const photosHtml = month.photos.map(p => {
-        const html = `<div class="photo-item" onclick="openLightbox(${idx})"><img src="imgs/${p.file}-thumb.webp" srcset="imgs/${p.file}-sm.webp 640w, imgs/${p.file}-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="${p.alt}" loading="lazy"></div>`;
-        idx++;
-        return html;
-      }).join('');
-      return `<div class="timeline-month">
-        <div class="timeline-month-label"><h4>${month.label}</h4></div>
-        <div class="timeline-photos">${photosHtml}</div>
-      </div>`;
-    }).join('');
+    container.innerHTML = `<div class="timeline-photos">${evoPhotos.map((p, i) =>
+      `<div class="photo-item" onclick="openLightbox(${galleryPhotos.length + i})"><img src="imgs/${p.file}-thumb.webp" srcset="imgs/${p.file}-sm.webp 640w, imgs/${p.file}-thumb.webp 1200w" sizes="(max-width: 768px) 100vw, 700px" alt="${p.alt}" loading="lazy"></div>`
+    ).join('')}</div>`;
   }
   renderTimeline();
 
