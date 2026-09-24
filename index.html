@@ -1142,9 +1142,9 @@
 
   // Carrusel de videos dron
   const dronVideos = [
-    'imgs/rugby-vid-02.mp4',
-    'imgs/dron1.mp4',
-    'imgs/baios-vid.mp4',
+    { src: 'imgs/rugby-vid-02.mp4', poster: 'imgs/rugby-vid-02-poster.webp' },
+    { src: 'imgs/dron-arquitectura.mp4', poster: 'imgs/dron-arquitectura-poster.webp' },
+    { src: 'imgs/baios-vid.mp4', poster: 'imgs/baios-vid-poster.webp' },
   ];
   let vcIndex = 0;
   const vcVideoEl = document.getElementById('vcVideo');
@@ -1156,7 +1156,8 @@
   }
   function loadCarouselVideo() {
     vcVideoEl.pause();
-    vcVideoEl.src = dronVideos[vcIndex];
+    vcVideoEl.poster = dronVideos[vcIndex].poster;
+    vcVideoEl.src = dronVideos[vcIndex].src;
     vcVideoEl.load();
     renderCarouselDots();
   }
